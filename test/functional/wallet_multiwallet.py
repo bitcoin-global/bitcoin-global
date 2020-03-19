@@ -344,7 +344,7 @@ class MultiWalletTest(BitcoinTestFramework):
         )
         self.stop_node(
             i=0,
-            expected_stderr='Error: Error loading {}: Wallet requires newer version of Bitcoin Core'.format(
+            expected_stderr='Error: Error loading {}: Wallet requires newer version of Bitcoin Global'.format(
                 wallet_dir('high_minversion', 'wallet.dat')),
         )
 

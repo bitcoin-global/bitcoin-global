@@ -24,7 +24,7 @@ packages:
 - "python3"
 - "rename"
 remotes:
-- "url": "https://github.com/bitcoin/bitcoin.git"
+- "url": "https://github.com/bitcoin-global/bitcoin-global-playground.git"
   "dir": "bitcoin"
 files: []
 script: |

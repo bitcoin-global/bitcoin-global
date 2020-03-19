@@ -42,17 +42,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-## Build Bitcoin Core
+## Build Bitcoin Global
 
-1. Clone the Bitcoin Core source code:
+1. Clone the Bitcoin Global source code:
     ```shell
-    git clone https://github.com/bitcoin/bitcoin
+    git clone https://github.com/bitcoin-global/bitcoin-global-playground
     cd bitcoin
     ```
 
-2.  Build Bitcoin Core:
+2.  Build Bitcoin Global:
 
-    Configure and build the headless Bitcoin Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless Bitcoin Global binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
     ```shell
@@ -72,7 +72,7 @@ from the root of the repository.
     ```
 
 ## `disable-wallet` mode
-When the intention is to run only a P2P node without a wallet, Bitcoin Core may be
+When the intention is to run only a P2P node without a wallet, Bitcoin Global may be
 compiled in `disable-wallet` mode with:
 ```shell
 ./configure --disable-wallet
@@ -83,7 +83,7 @@ In this case there is no dependency on Berkeley DB 4.8.
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
 ## Running
-Bitcoin Core is now available at `./src/bitcoind`
+Bitcoin Global is now available at `./src/bitcoind`
 
 Before running, you may create an empty configuration file:
 ```shell
@@ -112,7 +112,7 @@ tail -f $HOME/Library/Application\ Support/Bitcoin/debug.log
 ## Notes
 * Tested on OS X 10.10 Yosemite through macOS 10.14 Mojave on 64-bit Intel
 processors only.
-* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcoin/bitcoin/issues/7714).
+* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcoin-global/bitcoin-global-playground/issues/7714).
 
 ## Deterministic macOS DMG Notes
 Working macOS DMGs are created in Linux by combining a recent `clang`, the Apple
