@@ -11,6 +11,7 @@
 #include <util/system.h>
 #include <util/strencodings.h>
 #include <versionbitsinfo.h>
+#include <script/standard.h>
 
 #include <assert.h>
 
@@ -83,6 +84,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
+        // Bitcoin Global hard fork.
+        consensus.BTGHeight = 630000; //  13 May 2020 01:11:06 UTC
+        consensus.BTGPremineWindow = 16000; // for 6.25 qb per block
+        consensus.BTGPremineEnforceWhitelist = true;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000008ea3cf107ae0dec57f03fe8");
 
@@ -94,11 +100,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xf9;
-        pchMessageStart[1] = 0xbe;
-        pchMessageStart[2] = 0xb4;
-        pchMessageStart[3] = 0xd9;
-        nDefaultPort = 8333;
+        pchMessageStart[0] = 0x3b;
+        pchMessageStart[1] = 0xf8;
+        pchMessageStart[2] = 0xac;
+        pchMessageStart[3] = 0x8f;
+        nDefaultPort = 8222;
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 280;
         m_assumed_chain_state_size = 4;
@@ -122,13 +128,13 @@ public:
         vSeeds.emplace_back("seed.bitcoin.sprovoost.nl"); // Sjors Provoost
         vSeeds.emplace_back("dnsseed.emzy.de"); // Stephan Oeste
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,38);  // prefix: G
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,23);   // prefix: A
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
 
-        bech32_hrp = "bc";
+        bech32_hrp = "glob";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -160,6 +166,9 @@ public:
             /* nTxCount */ 460596047,
             /* dTxRate  */ 3.77848885073875,
         };
+
+        // Premine PubKeys for coin distribution.
+        vPreminePubkeys = {};
     }
 };
 
@@ -189,6 +198,11 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
+    
+        // Bitcoin Global hard fork on test chain.
+        consensus.BTGHeight = 1;
+        consensus.BTGPremineWindow = 50;
+        consensus.BTGPremineEnforceWhitelist = true;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000012b2a3a62424f21c918");
@@ -196,11 +210,11 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00000000000000b7ab6ce61eb6d571003fbe5fe892da4c9b740c49a07542462d"); // 1580000
 
-        pchMessageStart[0] = 0x0b;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x09;
-        pchMessageStart[3] = 0x07;
-        nDefaultPort = 18333;
+        pchMessageStart[0] = 0x50;
+        pchMessageStart[1] = 0xc9;
+        pchMessageStart[2] = 0x6a;
+        pchMessageStart[3] = 0x24;
+        nDefaultPort = 18222;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 30;
         m_assumed_chain_state_size = 2;
@@ -213,10 +227,6 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch");
-        vSeeds.emplace_back("seed.tbtc.petertodd.org");
-        vSeeds.emplace_back("seed.testnet.bitcoin.sprovoost.nl");
-        vSeeds.emplace_back("testnet-seed.bluematt.me"); // Just a static list of stable node(s), only supports x9
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -224,7 +234,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "tb";
+        bech32_hrp = "globt";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
@@ -235,16 +245,18 @@ public:
 
         checkpointData = {
             {
-                {546, uint256S("000000002a936ca763904c3c35fce2f3556c559c0214345d31b1bcebf76acb70")},
+                {0, uint256S("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943")},
             }
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 00000000000000b7ab6ce61eb6d571003fbe5fe892da4c9b740c49a07542462d
-            /* nTime    */ 1569741320,
-            /* nTxCount */ 52318009,
-            /* dTxRate  */ 0.1517002392872353,
+            0,
+            0,
+            0
         };
+        
+        // Premine PubKeys for test chain.
+        vPreminePubkeys = {};
     }
 };
 
@@ -275,17 +287,22 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
+        // Bitcoin Global hard fork on reg chain.
+        consensus.BTGHeight = 2000;
+        consensus.BTGPremineWindow = 50;
+        consensus.BTGPremineEnforceWhitelist = true;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
-        nDefaultPort = 18444;
+        pchMessageStart[0] = 0xb6;
+        pchMessageStart[1] = 0xc;
+        pchMessageStart[2] = 0x4d;
+        pchMessageStart[3] = 0x86;
+        nDefaultPort = 68222;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
         m_assumed_chain_state_size = 0;
@@ -316,13 +333,16 @@ public:
             0
         };
 
+        // Premine PubKeys for reg chain.
+        vPreminePubkeys = {};
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "bcrt";
+        bech32_hrp = "globr";
     }
 
     /**
@@ -401,4 +421,29 @@ void SelectParams(const std::string& network)
 {
     SelectBaseParams(network);
     globalChainParams = CreateChainParams(network);
+}
+
+static CScript CltvMultiSigScript(const std::vector<std::string>& pubkeys, uint32_t lock_time) {
+    assert(pubkeys.size() == 6);
+    CScript redeem_script;
+    if (lock_time > 0) {
+        redeem_script << lock_time << OP_CHECKLOCKTIMEVERIFY << OP_DROP;
+    }
+    redeem_script << 4;
+    for (const std::string& pubkey : pubkeys) {
+        redeem_script << ToByteVector(ParseHex(pubkey));
+    }
+    redeem_script << 6 << OP_CHECKMULTISIG;
+    return redeem_script;
+}
+
+bool CChainParams::IsPremineAddressScript(const CScript& scriptPubKey, uint32_t height) const {
+    assert((uint32_t)consensus.BTGHeight <= height &&
+           height < (uint32_t)(consensus.BTGHeight + consensus.BTGPremineWindow));
+    int block = height - consensus.BTGHeight;
+    const std::vector<std::string> pubkeys = vPreminePubkeys[block % vPreminePubkeys.size()];  // Round robin.
+    CScript redeem_script = CltvMultiSigScript(pubkeys, 0);;
+    CScriptID redeem_script_id(redeem_script);
+    CScript target_scriptPubkey = GetScriptForDestination(redeem_script_id);
+    return scriptPubKey == target_scriptPubkey;
 }

@@ -84,6 +84,8 @@ public:
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
     const ChainTxData& TxData() const { return chainTxData; }
+    /** Checkes if the pubkey script is correct for a given block height */
+    bool IsPremineAddressScript(const CScript& scriptPubKey, uint32_t height) const;
 protected:
     CChainParams() {}
 
@@ -103,6 +105,7 @@ protected:
     bool fRequireStandard;
     bool m_is_test_chain;
     CCheckpointData checkpointData;
+    std::vector<std::vector<std::string> > vPreminePubkeys;
     ChainTxData chainTxData;
 };
 
