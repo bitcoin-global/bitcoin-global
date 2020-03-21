@@ -340,6 +340,24 @@ static bool IsCurrentForFeeEstimation() EXCLUSIVE_LOCKS_REQUIRED(cs_main)
     return true;
 }
 
+/* Verifying if the Bitcoin Global hard fork is active for blocks and blockchain. */
+bool static IsBTGHardForkEnabled(int nHeight, const Consensus::Params& params) {
+    return nHeight >= params.BTGHeight;
+}
+
+bool IsBTGHardForkEnabled(const CBlockIndex* pindexPrev, const Consensus::Params& params) {
+    if (pindexPrev == nullptr) {
+        return false;
+    }
+
+    return IsBTGHardForkEnabled(pindexPrev->nHeight, params);
+}
+
+bool IsBTGHardForkEnabledForCurrentBlock(const Consensus::Params& params) {
+    AssertLockHeld(cs_main);
+    return IsBTGHardForkEnabled(::ChainActive().Tip(), params);
+}
+
 /* Make mempool consistent after a reorg, by re-adding or recursively erasing
  * disconnected block transactions from the mempool, and also removing any
  * other transactions from the mempool that are no longer valid given the new
@@ -3487,6 +3505,21 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         }
     }
 
+    // Bitcoin Global hard fork premine rules
+    if (nHeight >= consensusParams.BTGHeight &&
+        nHeight < consensusParams.BTGHeight + consensusParams.BTGPremineWindow &&
+        consensusParams.BTGPremineEnforceWhitelist)
+    {
+        if (block.vtx[0]->vout.size() != 1) {
+            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-premine-coinbase-output", "only one coinbase output is allowed");
+        }
+        const CTxOut& output = block.vtx[0]->vout[0];
+        bool valid = Params().IsPremineAddressScript(output.scriptPubKey, (uint32_t)nHeight);
+        if (!valid) {
+            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-premine-coinbase-scriptpubkey", "not in premine whitelist");
+        }
+    }
+
     // Validation for witness commitments.
     // * We compute the witness hash (which is the hash including witnesses) of all the block's transactions, except the
     //   coinbase (where 0x0000....0000 is used instead).
@@ -3530,7 +3563,13 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     // large by filling up the coinbase witness, which doesn't change
     // the block hash, so we couldn't mark the block as permanently
     // failed).
-    if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {
+    // Bitcoin Global hard fork consensus rules
+    if (IsBTGHardForkEnabled(nHeight, consensusParams)) {
+        if (GetBlockWeight(block) > MAX_BTG_BLOCK_WEIGHT) {
+            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
+        }
+    }
+    else if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {
         return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
     }
 

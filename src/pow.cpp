@@ -13,7 +13,14 @@
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
+    int nHeight = pindexLast->nHeight + 1;
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+
+    // Enable min-difficulty mining for premine period.
+    if (nHeight >= params.BTGHeight && (nHeight < params.BTGHeight + params.BTGPremineWindow))
+    {
+        return nProofOfWorkLimit;
+    }
 
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
