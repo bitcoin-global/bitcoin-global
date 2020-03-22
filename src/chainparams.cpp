@@ -423,27 +423,14 @@ void SelectParams(const std::string& network)
     globalChainParams = CreateChainParams(network);
 }
 
-static CScript CltvMultiSigScript(const std::vector<std::string>& pubkeys, uint32_t lock_time) {
-    assert(pubkeys.size() == 6);
-    CScript redeem_script;
-    if (lock_time > 0) {
-        redeem_script << lock_time << OP_CHECKLOCKTIMEVERIFY << OP_DROP;
-    }
-    redeem_script << 4;
-    for (const std::string& pubkey : pubkeys) {
-        redeem_script << ToByteVector(ParseHex(pubkey));
-    }
-    redeem_script << 6 << OP_CHECKMULTISIG;
-    return redeem_script;
-}
-
 bool CChainParams::IsPremineAddressScript(const CScript& scriptPubKey, uint32_t height) const {
     assert((uint32_t)consensus.BTGHeight <= height &&
            height < (uint32_t)(consensus.BTGHeight + consensus.BTGPremineWindow));
+    // assert(vPreminePubkeys.size() == 100);
+
     int block = height - consensus.BTGHeight;
-    const std::vector<std::string> pubkeys = vPreminePubkeys[block % vPreminePubkeys.size()];  // Round robin.
-    CScript redeem_script = CltvMultiSigScript(pubkeys, 0);;
-    CScriptID redeem_script_id(redeem_script);
-    CScript target_scriptPubkey = GetScriptForDestination(redeem_script_id);
+    const std::string vPreminePubkey = vPreminePubkeys[block % vPreminePubkeys.size()];  // Round robin.
+    CScript redeem_script = CScript() << ToByteVector(ParseHex(vPreminePubkey)) << OP_CHECKSIG;
+    CScript target_scriptPubkey = GetScriptForWitness(redeem_script);
     return scriptPubKey == target_scriptPubkey;
 }

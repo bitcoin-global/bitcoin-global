@@ -105,7 +105,7 @@ protected:
     bool fRequireStandard;
     bool m_is_test_chain;
     CCheckpointData checkpointData;
-    std::vector<std::vector<std::string> > vPreminePubkeys;
+    std::vector<std::string> vPreminePubkeys;
     ChainTxData chainTxData;
 };
 
