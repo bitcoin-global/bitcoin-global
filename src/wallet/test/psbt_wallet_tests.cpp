@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(psbt_updater_test)
     // Try to sign the mutated input
     SignatureData sigdata;
     psbtx.inputs[0].FillSignatureData(sigdata);
-    BOOST_CHECK(!SignPSBTInput(m_wallet, psbtx, 0, SIGHASH_ALL));
+    BOOST_CHECK(!SignPSBTInput(m_wallet, psbtx, 0, false, SIGHASH_ALL));
 }
 
 BOOST_AUTO_TEST_CASE(parse_hd_keypath)

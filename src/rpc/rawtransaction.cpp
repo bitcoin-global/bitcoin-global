@@ -33,7 +33,6 @@
 #include <validation.h>
 #include <validationinterface.h>
 
-
 #include <numeric>
 #include <stdint.h>
 
@@ -649,6 +648,12 @@ static UniValue combinerawtransaction(const JSONRPCRequest& request)
         view.SetBackend(viewDummy); // switch back to avoid locking mempool for too long
     }
 
+    bool no_forkid;
+    {
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }
+
     // Use CTransaction for the constant parts of the
     // transaction to avoid rehashing.
     const CTransaction txConst(mergedTx);
@@ -664,10 +669,10 @@ static UniValue combinerawtransaction(const JSONRPCRequest& request)
         // ... and merge in other signatures:
         for (const CMutableTransaction& txv : txVariants) {
             if (txv.vin.size() > i) {
-                sigdata.MergeSignatureData(DataFromTransaction(txv, i, coin.out));
+                sigdata.MergeSignatureData(DataFromTransaction(txv, i, coin.out, no_forkid));
             }
         }
-        ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&mergedTx, i, coin.out.nValue, 1), coin.out.scriptPubKey, sigdata);
+        ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&mergedTx, i, coin.out.nValue, no_forkid, 1), coin.out.scriptPubKey, sigdata, no_forkid);
 
         UpdateInput(txin, sigdata);
     }
@@ -709,8 +714,14 @@ static UniValue signrawtransactionwithkey(const JSONRPCRequest& request)
             "       \"NONE\"\n"
             "       \"SINGLE\"\n"
             "       \"ALL|ANYONECANPAY\"\n"
+            "       \"ALL|FORKID\"\n"
+            "       \"ALL|FORKID|ANYONECANPAY\"\n"
             "       \"NONE|ANYONECANPAY\"\n"
+            "       \"NONE|FORKID\"\n"
+            "       \"NONE|FORKID|ANYONECANPAY\"\n"
             "       \"SINGLE|ANYONECANPAY\"\n"
+            "       \"SINGLE|FORKID\"\n"
+            "       \"SINGLE|FORKID|ANYONECANPAY\"\n"
                     },
                 },
                 RPCResult{
@@ -760,10 +771,16 @@ static UniValue signrawtransactionwithkey(const JSONRPCRequest& request)
     }
     FindCoins(coins);
 
+    bool no_forkid;
+    {
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }
+
     // Parse the prevtxs array
     ParsePrevouts(request.params[2], &keystore, coins);
 
-    return SignTransaction(mtx, &keystore, coins, request.params[3]);
+    return SignTransaction(mtx, &keystore, coins, request.params[3], no_forkid);
 }
 
 static UniValue sendrawtransaction(const JSONRPCRequest& request)
@@ -1308,10 +1325,16 @@ UniValue finalizepsbt(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, strprintf("TX decode failed %s", error));
     }
 
+    bool no_forkid;
+    {
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }
+
     bool extract = request.params[1].isNull() || (!request.params[1].isNull() && request.params[1].get_bool());
 
     CMutableTransaction mtx;
-    bool complete = FinalizeAndExtractPSBT(psbtx, mtx);
+    bool complete = FinalizeAndExtractPSBT(psbtx, mtx, no_forkid);
 
     UniValue result(UniValue::VOBJ);
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
@@ -1533,6 +1556,12 @@ UniValue utxoupdatepsbt(const JSONRPCRequest& request)
         view.SetBackend(viewDummy); // switch back to avoid locking mempool for too long
     }
 
+    bool no_forkid;
+    {
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }
+
     // Fill the inputs
     for (unsigned int i = 0; i < psbtx.tx->vin.size(); ++i) {
         PSBTInput& input = psbtx.inputs.at(i);
@@ -1550,12 +1579,12 @@ UniValue utxoupdatepsbt(const JSONRPCRequest& request)
         // Update script/keypath information using descriptor data.
         // Note that SignPSBTInput does a lot more than just constructing ECDSA signatures
         // we don't actually care about those here, in fact.
-        SignPSBTInput(public_provider, psbtx, i, /* sighash_type */ 1);
+        SignPSBTInput(public_provider, psbtx, i, no_forkid, /* sighash_type */ no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID);
     }
 
     // Update script/keypath information using descriptor data.
     for (unsigned int i = 0; i < psbtx.tx->vout.size(); ++i) {
-        UpdatePSBTOutput(public_provider, psbtx, i);
+        UpdatePSBTOutput(public_provider, psbtx, i, no_forkid);
     }
 
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);

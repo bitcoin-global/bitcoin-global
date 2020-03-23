@@ -565,13 +565,13 @@ std::string PSBTRoleName(PSBTRole role);
 bool PSBTInputSigned(const PSBTInput& input);
 
 /** Signs a PSBTInput, verifying that all provided data matches what is being signed. */
-bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, int sighash = SIGHASH_ALL, SignatureData* out_sigdata = nullptr, bool use_dummy = false);
+bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, bool no_forkid, int sighash = SIGHASH_ALL | SIGHASH_FORKID, SignatureData* out_sigdata = nullptr, bool use_dummy = false);
 
 /** Updates a PSBTOutput with information from provider.
  *
  * This fills in the redeem_script, witness_script, and hd_keypaths where possible.
  */
-void UpdatePSBTOutput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index);
+void UpdatePSBTOutput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, bool no_forkid);
 
 /**
  * Finalizes a PSBT if possible, combining partial signatures.
@@ -588,7 +588,7 @@ bool FinalizePSBT(PartiallySignedTransaction& psbtx);
  * @param[out] result CMutableTransaction representing the complete transaction, if successful
  * @return True if we successfully extracted the transaction, false otherwise
  */
-bool FinalizeAndExtractPSBT(PartiallySignedTransaction& psbtx, CMutableTransaction& result);
+bool FinalizeAndExtractPSBT(PartiallySignedTransaction& psbtx, CMutableTransaction& result, bool no_forkid);
 
 /**
  * Combines PSBTs with the same underlying transaction, resulting in a single PSBT with all partial signatures from each input.

@@ -113,6 +113,9 @@ public:
         //! information is desired).
         virtual Optional<int> findFork(const uint256& hash, Optional<int>* height) = 0;
 
+        //! Checks if Bitcoin Global hard fork is enabled for current chain.
+        virtual bool IsBTGHardForkEnabledForTip() = 0;
+
         //! Get locator for the current chain tip.
         virtual CBlockLocator getTipLocator() = 0;
 

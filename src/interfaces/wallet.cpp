@@ -211,9 +211,10 @@ public:
     {
         auto locked_chain = m_wallet->chain().lock();
         LOCK(m_wallet->cs_wallet);
+        bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
         CTransactionRef tx;
         if (!m_wallet->CreateTransaction(*locked_chain, recipients, tx, fee, change_pos,
-                fail_reason, coin_control, sign)) {
+                no_forkid, fail_reason, coin_control, sign)) {
             return {};
         }
         return tx;

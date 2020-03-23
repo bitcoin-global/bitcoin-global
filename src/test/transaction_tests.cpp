@@ -372,7 +372,7 @@ static void CreateCreditAndSpend(const FillableSigningProvider& keystore, const 
     inputm.vout.resize(1);
     inputm.vout[0].nValue = 1;
     inputm.vout[0].scriptPubKey = CScript();
-    bool ret = SignSignature(keystore, *output, inputm, 0, SIGHASH_ALL);
+    bool ret = SignSignature(keystore, *output, inputm, 0, SIGHASH_ALL | SIGHASH_FORKID);
     assert(ret == success);
     CDataStream ssin(SER_NETWORK, PROTOCOL_VERSION);
     ssin << inputm;
@@ -454,7 +454,7 @@ BOOST_AUTO_TEST_CASE(test_big_witness_transaction)
 
     // sign all inputs
     for(uint32_t i = 0; i < mtx.vin.size(); i++) {
-        bool hashSigned = SignSignature(keystore, scriptPubKey, mtx, i, 1000, sigHashes.at(i % sigHashes.size()));
+        bool hashSigned = SignSignature(keystore, scriptPubKey, mtx, i, 1000, SIGHASH_FORKID | sigHashes.at(i % sigHashes.size()));
         assert(hashSigned);
     }
 
@@ -499,9 +499,9 @@ BOOST_AUTO_TEST_CASE(test_big_witness_transaction)
 SignatureData CombineSignatures(const CMutableTransaction& input1, const CMutableTransaction& input2, const CTransactionRef tx)
 {
     SignatureData sigdata;
-    sigdata = DataFromTransaction(input1, 0, tx->vout[0]);
-    sigdata.MergeSignatureData(DataFromTransaction(input2, 0, tx->vout[0]));
-    ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&input1, 0, tx->vout[0].nValue), tx->vout[0].scriptPubKey, sigdata);
+    sigdata = DataFromTransaction(input1, 0, tx->vout[0], false);
+    sigdata.MergeSignatureData(DataFromTransaction(input2, 0, tx->vout[0], false));
+    ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&input1, 0, tx->vout[0].nValue, false), tx->vout[0].scriptPubKey, sigdata, false);
     return sigdata;
 }
 

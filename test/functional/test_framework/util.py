@@ -553,7 +553,7 @@ def create_lots_of_big_transactions(node, txouts, utxos, num, fee):
         for txout in txouts:
             tx.vout.append(txout)
         newtx = tx.serialize().hex()
-        signresult = node.signrawtransactionwithwallet(newtx, None, "NONE")
+        signresult = node.signrawtransactionwithwallet(newtx, None, "NONE|FORKID")
         txid = node.sendrawtransaction(signresult["hex"], 0)
         txids.append(txid)
     return txids

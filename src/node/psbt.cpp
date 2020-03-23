@@ -14,6 +14,13 @@
 
 PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
 {
+    bool no_forkid = false;
+    /*{
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }*/
+    const int sighash_flag = /*no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID*/ 1;
+
     // Go through each input and build status
     PSBTAnalysis result;
 
@@ -61,7 +68,7 @@ PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
 
             // Figure out what is missing
             SignatureData outdata;
-            bool complete = SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, 1, &outdata);
+            bool complete = SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash_flag, &outdata);
 
             // Things are missing
             if (!complete) {
@@ -119,7 +126,7 @@ PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
             PSBTInput& input = psbtx.inputs[i];
             Coin newcoin;
 
-            if (!SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, 1, nullptr, true) || !psbtx.GetInputUTXO(newcoin.out, i)) {
+            if (!SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash_flag, nullptr, true) || !psbtx.GetInputUTXO(newcoin.out, i)) {
                 success = false;
                 break;
             } else {

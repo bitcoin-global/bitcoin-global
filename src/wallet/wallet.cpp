@@ -1776,7 +1776,7 @@ bool CWallet::DummySignInput(CTxIn &tx_in, const CTxOut &txout, bool use_max_sig
     const CScript& scriptPubKey = txout.scriptPubKey;
     SignatureData sigdata;
 
-    if (!ProduceSignature(*this, use_max_sig ? DUMMY_MAXIMUM_SIGNATURE_CREATOR : DUMMY_SIGNATURE_CREATOR, scriptPubKey, sigdata)) {
+    if (!ProduceSignature(*this, use_max_sig ? DUMMY_MAXIMUM_SIGNATURE_CREATOR : DUMMY_SIGNATURE_CREATOR, scriptPubKey, sigdata, true)) {
         return false;
     }
     UpdateInput(tx_in, sigdata);
@@ -2789,7 +2789,7 @@ bool CWallet::SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAm
     return res;
 }
 
-bool CWallet::SignTransaction(CMutableTransaction& tx)
+bool CWallet::SignTransaction(CMutableTransaction& tx, bool no_forkid)
 {
     AssertLockHeld(cs_wallet);
 
@@ -2803,7 +2803,8 @@ bool CWallet::SignTransaction(CMutableTransaction& tx)
         const CScript& scriptPubKey = mi->second.tx->vout[input.prevout.n].scriptPubKey;
         const CAmount& amount = mi->second.tx->vout[input.prevout.n].nValue;
         SignatureData sigdata;
-        if (!ProduceSignature(*this, MutableTransactionSignatureCreator(&tx, nIn, amount, SIGHASH_ALL), scriptPubKey, sigdata)) {
+        const int sighash_flag = no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID;
+        if (!ProduceSignature(*this, MutableTransactionSignatureCreator(&tx, nIn, amount, no_forkid, sighash_flag), scriptPubKey, sigdata, no_forkid)) {
             return false;
         }
         UpdateInput(input, sigdata);
@@ -2835,7 +2836,8 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, int& nC
     LOCK(cs_wallet);
 
     CTransactionRef tx_new;
-    if (!CreateTransaction(*locked_chain, vecSend, tx_new, nFeeRet, nChangePosInOut, strFailReason, coinControl, false)) {
+    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
+    if (!CreateTransaction(*locked_chain, vecSend, tx_new, nFeeRet, nChangePosInOut, no_forkid, strFailReason, coinControl, false)) {
         return false;
     }
 
@@ -2952,7 +2954,7 @@ OutputType CWallet::TransactionChangeType(OutputType change_type, const std::vec
 }
 
 bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std::vector<CRecipient>& vecSend, CTransactionRef& tx, CAmount& nFeeRet,
-                         int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign)
+                         int& nChangePosInOut, bool no_forkid, std::string& strFailReason, const CCoinControl& coin_control, bool sign)
 {
     CAmount nValue = 0;
     ReserveDestination reservedest(this);
@@ -3261,7 +3263,8 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
                 const CScript& scriptPubKey = coin.txout.scriptPubKey;
                 SignatureData sigdata;
 
-                if (!ProduceSignature(*this, MutableTransactionSignatureCreator(&txNew, nIn, coin.txout.nValue, SIGHASH_ALL), scriptPubKey, sigdata))
+                const int sighash_flag = no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID;
+                if (!ProduceSignature(*this, MutableTransactionSignatureCreator(&txNew, nIn, coin.txout.nValue, no_forkid, sighash_flag), scriptPubKey, sigdata, no_forkid))
                 {
                     strFailReason = _("Signing transaction failed").translated;
                     return false;

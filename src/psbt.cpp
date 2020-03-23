@@ -215,7 +215,7 @@ bool PSBTInputSigned(const PSBTInput& input)
     return !input.final_script_sig.empty() || !input.final_script_witness.IsNull();
 }
 
-void UpdatePSBTOutput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index)
+void UpdatePSBTOutput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, bool no_forkid)
 {
     const CTxOut& out = psbt.tx->vout.at(index);
     PSBTOutput& psbt_out = psbt.outputs.at(index);
@@ -228,13 +228,13 @@ void UpdatePSBTOutput(const SigningProvider& provider, PartiallySignedTransactio
     // Note that ProduceSignature is used to fill in metadata (not actual signatures),
     // so provider does not need to provide any private keys (it can be a HidingSigningProvider).
     MutableTransactionSignatureCreator creator(psbt.tx.get_ptr(), /* index */ 0, out.nValue, SIGHASH_ALL);
-    ProduceSignature(provider, creator, out.scriptPubKey, sigdata);
+    ProduceSignature(provider, creator, out.scriptPubKey, sigdata, no_forkid);
 
     // Put redeem_script, witness_script, key paths, into PSBTOutput.
     psbt_out.FromSignatureData(sigdata);
 }
 
-bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, int sighash, SignatureData* out_sigdata, bool use_dummy)
+bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& psbt, int index, bool no_forkid, int sighash, SignatureData* out_sigdata, bool use_dummy)
 {
     PSBTInput& input = psbt.inputs.at(index);
     const CMutableTransaction& tx = *psbt.tx;
@@ -280,10 +280,10 @@ bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& 
     sigdata.witness = false;
     bool sig_complete;
     if (use_dummy) {
-        sig_complete = ProduceSignature(provider, DUMMY_SIGNATURE_CREATOR, utxo.scriptPubKey, sigdata);
+        sig_complete = ProduceSignature(provider, DUMMY_SIGNATURE_CREATOR, utxo.scriptPubKey, sigdata, no_forkid);
     } else {
-        MutableTransactionSignatureCreator creator(&tx, index, utxo.nValue, sighash);
-        sig_complete = ProduceSignature(provider, creator, utxo.scriptPubKey, sigdata);
+        MutableTransactionSignatureCreator creator(&tx, index, utxo.nValue, no_forkid, sighash);
+        sig_complete = ProduceSignature(provider, creator, utxo.scriptPubKey, sigdata, no_forkid);
     }
     // Verify that a witness signature was produced in case one was required.
     if (require_witness_sig && !sigdata.witness) return false;
@@ -306,7 +306,7 @@ bool SignPSBTInput(const SigningProvider& provider, PartiallySignedTransaction& 
     return sig_complete;
 }
 
-bool FinalizePSBT(PartiallySignedTransaction& psbtx)
+bool FinalizePSBT(PartiallySignedTransaction& psbtx, bool no_forkid)
 {
     // Finalize input signatures -- in case we have partial signatures that add up to a complete
     //   signature, but have not combined them yet (e.g. because the combiner that created this
@@ -314,17 +314,17 @@ bool FinalizePSBT(PartiallySignedTransaction& psbtx)
     //   script.
     bool complete = true;
     for (unsigned int i = 0; i < psbtx.tx->vin.size(); ++i) {
-        complete &= SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, SIGHASH_ALL);
+        complete &= SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID);
     }
 
     return complete;
 }
 
-bool FinalizeAndExtractPSBT(PartiallySignedTransaction& psbtx, CMutableTransaction& result)
+bool FinalizeAndExtractPSBT(PartiallySignedTransaction& psbtx, CMutableTransaction& result, bool no_forkid)
 {
     // It's not safe to extract a PSBT that isn't finalized, and there's no easy way to check
     //   whether a PSBT is finalized without finalizing it, so we just do this.
-    if (!FinalizePSBT(psbtx)) {
+    if (!FinalizePSBT(psbtx, no_forkid)) {
         return false;
     }
 

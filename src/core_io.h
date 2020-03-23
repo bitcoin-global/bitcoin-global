@@ -36,7 +36,7 @@ bool DecodeHexBlockHeader(CBlockHeader&, const std::string& hex_header);
  */
 bool ParseHashStr(const std::string& strHex, uint256& result);
 std::vector<unsigned char> ParseHexUV(const UniValue& v, const std::string& strName);
-int ParseSighashString(const UniValue& sighash);
+int ParseSighashString(const UniValue& sighash, bool enforce_forkid = true);
 
 // core_write.cpp
 UniValue ValueFromAmount(const CAmount& amount);

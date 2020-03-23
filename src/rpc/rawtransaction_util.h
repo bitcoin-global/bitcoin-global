@@ -23,7 +23,7 @@ class SigningProvider;
  * @param  hashType      The signature hash type
  * @returns JSON object with details of signed transaction
  */
-UniValue SignTransaction(CMutableTransaction& mtx, const SigningProvider* keystore, const std::map<COutPoint, Coin>& coins, const UniValue& hashType);
+UniValue SignTransaction(CMutableTransaction& mtx, const SigningProvider* keystore, const std::map<COutPoint, Coin>& coins, const UniValue& hashType, bool no_forkid);
 
 /**
   * Parse a prevtxs UniValue array and get the map of coins from it

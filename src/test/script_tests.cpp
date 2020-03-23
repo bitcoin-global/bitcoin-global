@@ -366,7 +366,7 @@ public:
 
     TestBuilder& PushSig(const CKey& key, int nHashType = SIGHASH_ALL, unsigned int lenR = 32, unsigned int lenS = 32, SigVersion sigversion = SigVersion::BASE, CAmount amount = 0)
     {
-        uint256 hash = SignatureHash(script, spendTx, 0, nHashType, amount, sigversion);
+        uint256 hash = SignatureHash(script, spendTx, 0, nHashType, amount, sigversion, false);
         std::vector<unsigned char> vchSig, r, s;
         uint32_t iter = 0;
         do {
@@ -1058,7 +1058,7 @@ BOOST_AUTO_TEST_CASE(script_cltv_truncated)
 static CScript
 sign_multisig(const CScript& scriptPubKey, const std::vector<CKey>& keys, const CTransaction& transaction)
 {
-    uint256 hash = SignatureHash(scriptPubKey, transaction, 0, SIGHASH_ALL, 0, SigVersion::BASE);
+    uint256 hash = SignatureHash(scriptPubKey, transaction, 0, SIGHASH_ALL, 0, SigVersion::BASE, false);
 
     CScript result;
     //
@@ -1192,7 +1192,7 @@ SignatureData CombineSignatures(const CTxOut& txout, const CMutableTransaction& 
     SignatureData data;
     data.MergeSignatureData(scriptSig1);
     data.MergeSignatureData(scriptSig2);
-    ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&tx, 0, txout.nValue), txout.scriptPubKey, data);
+    ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&tx, 0, txout.nValue, false), txout.scriptPubKey, data, false);
     return data;
 }
 
@@ -1222,7 +1222,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
 
     // Single signature case:
     BOOST_CHECK(SignSignature(keystore, CTransaction(txFrom), txTo, 0, SIGHASH_ALL)); // changes scriptSig
-    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0]);
+    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0], false);
     combined = CombineSignatures(txFrom.vout[0], txTo, scriptSig, empty);
     BOOST_CHECK(combined.scriptSig == scriptSig.scriptSig);
     combined = CombineSignatures(txFrom.vout[0], txTo, empty, scriptSig);
@@ -1230,7 +1230,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     SignatureData scriptSigCopy = scriptSig;
     // Signing again will give a different, valid signature:
     BOOST_CHECK(SignSignature(keystore, CTransaction(txFrom), txTo, 0, SIGHASH_ALL));
-    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0]);
+    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0], false);
     combined = CombineSignatures(txFrom.vout[0], txTo, scriptSigCopy, scriptSig);
     BOOST_CHECK(combined.scriptSig == scriptSigCopy.scriptSig || combined.scriptSig == scriptSig.scriptSig);
 
@@ -1239,14 +1239,14 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     BOOST_CHECK(keystore.AddCScript(pkSingle));
     scriptPubKey = GetScriptForDestination(ScriptHash(pkSingle));
     BOOST_CHECK(SignSignature(keystore, CTransaction(txFrom), txTo, 0, SIGHASH_ALL));
-    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0]);
+    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0], false);
     combined = CombineSignatures(txFrom.vout[0], txTo, scriptSig, empty);
     BOOST_CHECK(combined.scriptSig == scriptSig.scriptSig);
     combined = CombineSignatures(txFrom.vout[0], txTo, empty, scriptSig);
     BOOST_CHECK(combined.scriptSig == scriptSig.scriptSig);
     scriptSigCopy = scriptSig;
     BOOST_CHECK(SignSignature(keystore, CTransaction(txFrom), txTo, 0, SIGHASH_ALL));
-    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0]);
+    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0], false);
     combined = CombineSignatures(txFrom.vout[0], txTo, scriptSigCopy, scriptSig);
     BOOST_CHECK(combined.scriptSig == scriptSigCopy.scriptSig || combined.scriptSig == scriptSig.scriptSig);
 
@@ -1254,7 +1254,7 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
     scriptPubKey = GetScriptForMultisig(2, pubkeys);
     BOOST_CHECK(keystore.AddCScript(scriptPubKey));
     BOOST_CHECK(SignSignature(keystore, CTransaction(txFrom), txTo, 0, SIGHASH_ALL));
-    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0]);
+    scriptSig = DataFromTransaction(txTo, 0, txFrom.vout[0], false);
     combined = CombineSignatures(txFrom.vout[0], txTo, scriptSig, empty);
     BOOST_CHECK(combined.scriptSig == scriptSig.scriptSig);
     combined = CombineSignatures(txFrom.vout[0], txTo, empty, scriptSig);
@@ -1262,15 +1262,15 @@ BOOST_AUTO_TEST_CASE(script_combineSigs)
 
     // A couple of partially-signed versions:
     std::vector<unsigned char> sig1;
-    uint256 hash1 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_ALL, 0, SigVersion::BASE);
+    uint256 hash1 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_ALL, 0, SigVersion::BASE, false);
     BOOST_CHECK(keys[0].Sign(hash1, sig1));
     sig1.push_back(SIGHASH_ALL);
     std::vector<unsigned char> sig2;
-    uint256 hash2 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_NONE, 0, SigVersion::BASE);
+    uint256 hash2 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_NONE, 0, SigVersion::BASE, false);
     BOOST_CHECK(keys[1].Sign(hash2, sig2));
     sig2.push_back(SIGHASH_NONE);
     std::vector<unsigned char> sig3;
-    uint256 hash3 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_SINGLE, 0, SigVersion::BASE);
+    uint256 hash3 = SignatureHash(scriptPubKey, txTo, 0, SIGHASH_SINGLE, 0, SigVersion::BASE, false);
     BOOST_CHECK(keys[2].Sign(hash3, sig3));
     sig3.push_back(SIGHASH_SINGLE);
 

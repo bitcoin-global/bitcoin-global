@@ -588,7 +588,10 @@ class CScript(bytes):
 SIGHASH_ALL = 1
 SIGHASH_NONE = 2
 SIGHASH_SINGLE = 3
+SIGHASH_FORKID = 0x40
 SIGHASH_ANYONECANPAY = 0x80
+
+FORKID_BTG = 78
 
 def FindAndDelete(script, sig):
     """Consensus critical, see FindAndDelete() in Satoshi codebase"""
@@ -651,6 +654,9 @@ def SignatureHash(script, txTo, inIdx, hashtype):
         txtmp.vin = []
         txtmp.vin.append(tmp)
 
+    if hashtype & SIGHASH_FORKID:
+        hashtype |= FORKID_BTG << 8
+
     s = txtmp.serialize_without_witness()
     s += struct.pack(b"<I", hashtype)
 
@@ -688,6 +694,9 @@ def SegwitVersion1SignatureHash(script, txTo, inIdx, hashtype, amount):
     elif ((hashtype & 0x1f) == SIGHASH_SINGLE and inIdx < len(txTo.vout)):
         serialize_outputs = txTo.vout[inIdx].serialize()
         hashOutputs = uint256_from_str(hash256(serialize_outputs))
+
+    if hashtype & SIGHASH_FORKID:
+        hashtype |= FORKID_BTG << 8
 
     ss = bytes()
     ss += struct.pack("<i", txTo.nVersion)

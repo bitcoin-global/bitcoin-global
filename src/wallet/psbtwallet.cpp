@@ -4,7 +4,7 @@
 
 #include <wallet/psbtwallet.h>
 
-TransactionError FillPSBT(const CWallet* pwallet, PartiallySignedTransaction& psbtx, bool& complete, int sighash_type, bool sign, bool bip32derivs)
+TransactionError FillPSBT(const CWallet* pwallet, PartiallySignedTransaction& psbtx, bool& complete, bool no_forkid, int sighash_type, bool sign, bool bip32derivs)
 {
     LOCK(pwallet->cs_wallet);
     // Get all of the previous transactions
@@ -46,12 +46,12 @@ TransactionError FillPSBT(const CWallet* pwallet, PartiallySignedTransaction& ps
             }
         }
 
-        complete &= SignPSBTInput(HidingSigningProvider(pwallet, !sign, !bip32derivs), psbtx, i, sighash_type);
+        complete &= SignPSBTInput(HidingSigningProvider(pwallet, !sign, !bip32derivs), psbtx, i, no_forkid, sighash_type);
     }
 
     // Fill in the bip32 keypaths and redeemscripts for the outputs so that hardware wallets can identify change
     for (unsigned int i = 0; i < psbtx.tx->vout.size(); ++i) {
-        UpdatePSBTOutput(HidingSigningProvider(pwallet, true, !bip32derivs), psbtx, i);
+        UpdatePSBTOutput(HidingSigningProvider(pwallet, true, !bip32derivs), psbtx, i, no_forkid);
     }
 
     return TransactionError::OK;

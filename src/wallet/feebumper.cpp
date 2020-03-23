@@ -2,6 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <chainparams.h>
 #include <consensus/validation.h>
 #include <interfaces/chain.h>
 #include <wallet/coincontrol.h>
@@ -14,6 +15,7 @@
 #include <util/rbf.h>
 #include <util/system.h>
 #include <util/validation.h>
+#include <validation.h>
 
 //! Check whether transaction has descendant in wallet or mempool, or has been
 //! mined, or conflicts with a mined transaction. Return a feebumper::Result.
@@ -283,6 +285,7 @@ Result CreateRateBumpTransaction(CWallet* wallet, const uint256& txid, const CCo
 
     auto locked_chain = wallet->chain().lock();
     LOCK(wallet->cs_wallet);
+    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
     errors.clear();
     auto it = wallet->mapWallet.find(txid);
     if (it == wallet->mapWallet.end()) {
@@ -343,7 +346,7 @@ Result CreateRateBumpTransaction(CWallet* wallet, const uint256& txid, const CCo
     CAmount fee_ret;
     int change_pos_in_out = -1; // No requested location for change
     std::string fail_reason;
-    if (!wallet->CreateTransaction(*locked_chain, recipients, tx_new, fee_ret, change_pos_in_out, fail_reason, new_coin_control, false)) {
+    if (!wallet->CreateTransaction(*locked_chain, recipients, tx_new, fee_ret, change_pos_in_out, no_forkid, fail_reason, new_coin_control)) {
         errors.push_back("Unable to create transaction: " + fail_reason);
         return Result::WALLET_ERROR;
     }
@@ -366,7 +369,8 @@ Result CreateRateBumpTransaction(CWallet* wallet, const uint256& txid, const CCo
 bool SignTransaction(CWallet* wallet, CMutableTransaction& mtx) {
     auto locked_chain = wallet->chain().lock();
     LOCK(wallet->cs_wallet);
-    return wallet->SignTransaction(mtx);
+    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
+    return wallet->SignTransaction(mtx, no_forkid);
 }
 
 Result CommitTransaction(CWallet* wallet, const uint256& txid, CMutableTransaction&& mtx, std::vector<std::string>& errors, uint256& bumped_txid)
