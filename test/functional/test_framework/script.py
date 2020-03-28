@@ -617,6 +617,8 @@ def SignatureHash(script, txTo, inIdx, hashtype):
     Returns (hash, err) to precisely match the consensus-critical behavior of
     the SIGHASH_SINGLE bug. (inIdx is *not* checked for validity)
     """
+    assert not (hashtype & SIGHASH_FORKID), "BIP143 is mandatory for FORKID enabled transactions."
+
     HASH_ONE = b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 
     if inIdx >= len(txTo.vin):
@@ -654,9 +656,6 @@ def SignatureHash(script, txTo, inIdx, hashtype):
         txtmp.vin = []
         txtmp.vin.append(tmp)
 
-    if hashtype & SIGHASH_FORKID:
-        hashtype |= FORKID_BTG << 8
-
     s = txtmp.serialize_without_witness()
     s += struct.pack(b"<I", hashtype)
 
@@ -667,7 +666,7 @@ def SignatureHash(script, txTo, inIdx, hashtype):
 # TODO: Allow cached hashPrevouts/hashSequence/hashOutputs to be provided.
 # Performance optimization probably not necessary for python tests, however.
 # Note that this corresponds to sigversion == 1 in EvalScript, which is used
-# for version 0 witnesses.
+# for version 0 witnesses and all the FORKID transactions.
 def SegwitVersion1SignatureHash(script, txTo, inIdx, hashtype, amount):
 
     hashPrevouts = 0

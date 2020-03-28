@@ -102,8 +102,8 @@ class AddressTypeTest(BitcoinTestFramework):
 
     # Quick test of python bech32 implementation
     def test_python_bech32(self, addr):
-        hrp = addr[:4]
-        assert_equal(hrp, "bcrt")
+        hrp = addr[:5]
+        assert_equal(hrp, "globr")
         (witver, witprog) = decode(hrp, addr)
         assert_equal(encode(hrp, witver, witprog), addr)
 

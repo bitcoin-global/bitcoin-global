@@ -253,6 +253,9 @@ class PSBTTest(BitcoinTestFramework):
         # We don't care about the decode result, but decoding must succeed.
         self.nodes[0].decodepsbt(double_processed_psbt["psbt"])
 
+        # Make sure change address wallet does not have P2SH innerscript access to results in success
+        # when attempting BnB coin selection
+        self.nodes[0].walletcreatefundedpsbt([], [{self.nodes[2].getnewaddress():unspent["amount"]+1}], block_height+2, {"changeAddress":self.nodes[1].getnewaddress()}, False)
         # BIP 174 Test Vectors
 
         # Check that unknown values are just passed through
@@ -290,7 +293,7 @@ class PSBTTest(BitcoinTestFramework):
             wrpc = self.nodes[2].get_wallet_rpc("wallet{}".format(i))
             for key in signer['privkeys']:
                 wrpc.importprivkey(key)
-            signed_tx = wrpc.walletprocesspsbt(signer['psbt'])['psbt']
+            signed_tx = wrpc.walletprocesspsbt(signer['psbt'], True, 'ALL')['psbt']
             assert_equal(signed_tx, signer['result'])
 
         # Combiner test

@@ -36,6 +36,7 @@ def get_socket_inodes(pid):
         target = os.readlink(os.path.join(base, item))
         if target.startswith('socket:'):
             inodes.append(int(target[8:-1]))
+    print(inodes)
     return inodes
 
 def _remove_empty(array):
