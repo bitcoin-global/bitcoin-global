@@ -202,7 +202,7 @@ public:
         // Bitcoin Global hard fork on test chain.
         consensus.BTGHeight = 1;
         consensus.BTGPremineWindow = 50;
-        consensus.BTGPremineEnforceWhitelist = true;
+        consensus.BTGPremineEnforceWhitelist = false;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000012b2a3a62424f21c918");
@@ -254,9 +254,6 @@ public:
             0,
             0
         };
-        
-        // Premine PubKeys for test chain.
-        vPreminePubkeys = {};
     }
 };
 
@@ -290,7 +287,7 @@ public:
         // Bitcoin Global hard fork on reg chain.
         consensus.BTGHeight = 2000;
         consensus.BTGPremineWindow = 50;
-        consensus.BTGPremineEnforceWhitelist = true;
+        consensus.BTGPremineEnforceWhitelist = false;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -299,7 +296,7 @@ public:
         consensus.defaultAssumeValid = uint256S("0x00");
 
         pchMessageStart[0] = 0xb6;
-        pchMessageStart[1] = 0xc;
+        pchMessageStart[1] = 0x0c;
         pchMessageStart[2] = 0x4d;
         pchMessageStart[3] = 0x86;
         nDefaultPort = 68222;
@@ -332,9 +329,6 @@ public:
             0,
             0
         };
-
-        // Premine PubKeys for reg chain.
-        vPreminePubkeys = {};
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);

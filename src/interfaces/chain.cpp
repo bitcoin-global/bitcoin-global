@@ -133,12 +133,6 @@ class LockImpl : public Chain::Lock, public UniqueLock<CCriticalSection>
         }
         return nullopt;
     }
-    bool IsBTGHardForkEnabledForTip() override {
-        LOCK(cs_main);
-        int height = ::ChainActive().Height();
-        auto params = Params().GetConsensus();
-        return height >= params.BTGHeight;
-    }
     CBlockLocator getTipLocator() override
     {
         LockAssertion lock(::cs_main);
@@ -280,6 +274,10 @@ public:
     {
         LOCK(cs_main);
         return GuessVerificationProgress(Params().TxData(), LookupBlockIndex(block_hash));
+    }
+    bool isBTGHardForkEnabledForCurrentBlock() override {
+        LOCK(cs_main);
+        return IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
     }
     RBFTransactionState isRBFOptIn(const CTransaction& tx) override
     {

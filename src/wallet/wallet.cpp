@@ -2789,12 +2789,13 @@ bool CWallet::SelectCoins(const std::vector<COutput>& vAvailableCoins, const CAm
     return res;
 }
 
-bool CWallet::SignTransaction(CMutableTransaction& tx, bool no_forkid)
+bool CWallet::SignTransaction(CMutableTransaction& tx)
 {
     AssertLockHeld(cs_wallet);
 
     // sign the new tx
     int nIn = 0;
+    bool no_forkid = !chain().isBTGHardForkEnabledForCurrentBlock();
     for (auto& input : tx.vin) {
         std::map<uint256, CWalletTx>::const_iterator mi = mapWallet.find(input.prevout.hash);
         if(mi == mapWallet.end() || input.prevout.n >= mi->second.tx->vout.size()) {
@@ -2836,8 +2837,7 @@ bool CWallet::FundTransaction(CMutableTransaction& tx, CAmount& nFeeRet, int& nC
     LOCK(cs_wallet);
 
     CTransactionRef tx_new;
-    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
-    if (!CreateTransaction(*locked_chain, vecSend, tx_new, nFeeRet, nChangePosInOut, no_forkid, strFailReason, coinControl, false)) {
+    if (!CreateTransaction(*locked_chain, vecSend, tx_new, nFeeRet, nChangePosInOut, strFailReason, coinControl, false)) {
         return false;
     }
 
@@ -2954,7 +2954,7 @@ OutputType CWallet::TransactionChangeType(OutputType change_type, const std::vec
 }
 
 bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std::vector<CRecipient>& vecSend, CTransactionRef& tx, CAmount& nFeeRet,
-                         int& nChangePosInOut, bool no_forkid, std::string& strFailReason, const CCoinControl& coin_control, bool sign)
+                                int& nChangePosInOut, std::string& strFailReason, const CCoinControl& coin_control, bool sign)
 {
     CAmount nValue = 0;
     ReserveDestination reservedest(this);
@@ -3258,6 +3258,7 @@ bool CWallet::CreateTransaction(interfaces::Chain::Lock& locked_chain, const std
         if (sign)
         {
             int nIn = 0;
+            bool no_forkid = !chain().isBTGHardForkEnabledForCurrentBlock();
             for (const auto& coin : selected_coins)
             {
                 const CScript& scriptPubKey = coin.txout.scriptPubKey;

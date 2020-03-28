@@ -113,9 +113,6 @@ public:
         //! information is desired).
         virtual Optional<int> findFork(const uint256& hash, Optional<int>* height) = 0;
 
-        //! Checks if Bitcoin Global hard fork is enabled for current chain.
-        virtual bool IsBTGHardForkEnabledForTip() = 0;
-
         //! Get locator for the current chain tip.
         virtual CBlockLocator getTipLocator() = 0;
 
@@ -151,6 +148,9 @@ public:
     //! Estimate fraction of total transactions verified if blocks up to
     //! the specified block hash are verified.
     virtual double guessVerificationProgress(const uint256& block_hash) = 0;
+
+    //! Checks if Bitcoin Global hard fork is enabled for current chain.
+    virtual bool isBTGHardForkEnabledForCurrentBlock() = 0;
 
     //! Check if transaction is RBF opt in.
     virtual RBFTransactionState isRBFOptIn(const CTransaction& tx) = 0;

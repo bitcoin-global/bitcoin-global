@@ -15,11 +15,7 @@
 PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
 {
     bool no_forkid = false;
-    /*{
-        LOCK(cs_main);
-        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
-    }*/
-    const int sighash_flag = /*no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID*/ 1;
+    const int sighash_flag = 1;
 
     // Go through each input and build status
     PSBTAnalysis result;

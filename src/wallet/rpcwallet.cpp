@@ -338,9 +338,7 @@ static CTransactionRef SendMoney(interfaces::Chain::Lock& locked_chain, CWallet 
     CRecipient recipient = {scriptPubKey, nValue, fSubtractFeeFromAmount};
     vecSend.push_back(recipient);
     CTransactionRef tx;
-
-    bool no_forkid = !locked_chain.IsBTGHardForkEnabledForTip();
-    if (!pwallet->CreateTransaction(locked_chain, vecSend, tx, nFeeRequired, nChangePosRet, no_forkid, strError, coin_control)) {
+    if (!pwallet->CreateTransaction(locked_chain, vecSend, tx, nFeeRequired, nChangePosRet, strError, coin_control)) {
         if (!fSubtractFeeFromAmount && nValue + nFeeRequired > curBalance)
             strError = strprintf("Error: This transaction requires a transaction fee of at least %s", FormatMoney(nFeeRequired));
         throw JSONRPCError(RPC_WALLET_ERROR, strError);
@@ -917,7 +915,6 @@ static UniValue sendmany(const JSONRPCRequest& request)
         vecSend.push_back(recipient);
     }
 
-    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
     EnsureWalletIsUnlocked(pwallet);
 
     // Shuffle recipient list
@@ -928,7 +925,7 @@ static UniValue sendmany(const JSONRPCRequest& request)
     int nChangePosRet = -1;
     std::string strFailReason;
     CTransactionRef tx;
-    bool fCreated = pwallet->CreateTransaction(*locked_chain, vecSend, tx, nFeeRequired, nChangePosRet, no_forkid, strFailReason, coin_control);
+    bool fCreated = pwallet->CreateTransaction(*locked_chain, vecSend, tx, nFeeRequired, nChangePosRet, strFailReason, coin_control);
     if (!fCreated)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
     CValidationState state;
@@ -3295,10 +3292,13 @@ UniValue signrawtransactionwithwallet(const JSONRPCRequest& request)
     }
     pwallet->chain().findCoins(coins);
 
+    // Verify active forks
+    bool no_forkid = !pwallet->chain().isBTGHardForkEnabledForCurrentBlock();
+
     // Parse the prevtxs array
     ParsePrevouts(request.params[1], nullptr, coins);
 
-    return SignTransaction(mtx, pwallet, coins, request.params[2], !locked_chain->IsBTGHardForkEnabledForTip());
+    return SignTransaction(mtx, pwallet, coins, request.params[2], no_forkid);
 }
 
 static UniValue bumpfee(const JSONRPCRequest& request)
@@ -4044,11 +4044,8 @@ UniValue walletprocesspsbt(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, strprintf("TX decode failed %s", error));
     }
     
-    auto locked_chain = pwallet->chain().lock();
-    LOCK(pwallet->cs_wallet);
-    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
-    
     // Get the sighash type
+    bool no_forkid = !pwallet->chain().isBTGHardForkEnabledForCurrentBlock();
     int nHashType = ParseSighashString(request.params[2], !no_forkid);
 
     // Fill transaction with our data and also sign
@@ -4174,11 +4171,8 @@ UniValue walletcreatefundedpsbt(const JSONRPCRequest& request)
     // Make a blank psbt
     PartiallySignedTransaction psbtx(rawTx);
 
-    auto locked_chain = pwallet->chain().lock();
-    LOCK(pwallet->cs_wallet);
-    bool no_forkid = !locked_chain->IsBTGHardForkEnabledForTip();
-
     // Fill transaction with out data but don't sign
+    bool no_forkid = !pwallet->chain().isBTGHardForkEnabledForCurrentBlock();
     bool bip32derivs = request.params[4].isNull() ? false : request.params[4].get_bool();
     bool complete = true;
     const TransactionError err = FillPSBT(pwallet, psbtx, complete, no_forkid, 1, false, bip32derivs);
