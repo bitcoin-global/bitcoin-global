@@ -3577,7 +3577,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     // Bitcoin Global hard fork consensus rules
     if (IsBTGHardForkEnabled(nHeight, consensusParams)) {
         if (GetBlockWeight(block) > MAX_BTG_BLOCK_WEIGHT) {
-            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
+            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-btg-blk-weight", strprintf("%s : weight limit failed", __func__));
         }
     }
     else if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {

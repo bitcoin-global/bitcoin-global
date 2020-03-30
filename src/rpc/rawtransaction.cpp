@@ -1732,7 +1732,13 @@ UniValue analyzepsbt(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, strprintf("TX decode failed %s", error));
     }
 
-    PSBTAnalysis psbta = AnalyzePSBT(psbtx);
+    bool no_forkid;
+    {
+        LOCK(cs_main);
+        no_forkid = !IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus());
+    }
+
+    PSBTAnalysis psbta = AnalyzePSBT(psbtx, no_forkid, no_forkid ? SIGHASH_ALL : SIGHASH_ALL | SIGHASH_FORKID);
 
     UniValue result(UniValue::VOBJ);
     UniValue inputs_result(UniValue::VARR);

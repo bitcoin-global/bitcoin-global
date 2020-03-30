@@ -12,11 +12,8 @@
 
 #include <numeric>
 
-PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
+PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx, bool no_forkid, int sighash)
 {
-    bool no_forkid = false;
-    const int sighash_flag = 1;
-
     // Go through each input and build status
     PSBTAnalysis result;
 
@@ -64,7 +61,7 @@ PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
 
             // Figure out what is missing
             SignatureData outdata;
-            bool complete = SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash_flag, &outdata);
+            bool complete = SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash, &outdata);
 
             // Things are missing
             if (!complete) {
@@ -122,7 +119,7 @@ PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx)
             PSBTInput& input = psbtx.inputs[i];
             Coin newcoin;
 
-            if (!SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash_flag, nullptr, true) || !psbtx.GetInputUTXO(newcoin.out, i)) {
+            if (!SignPSBTInput(DUMMY_SIGNING_PROVIDER, psbtx, i, no_forkid, sighash, nullptr, true) || !psbtx.GetInputUTXO(newcoin.out, i)) {
                 success = false;
                 break;
             } else {

@@ -49,6 +49,6 @@ struct PSBTAnalysis {
  * @param[in] psbtx the PSBT to analyze
  * @return A PSBTAnalysis with information about the provided PSBT.
  */
-PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx);
+PSBTAnalysis AnalyzePSBT(PartiallySignedTransaction psbtx, bool no_forkid, int sighash);
 
 #endif // BITCOIN_NODE_PSBT_H

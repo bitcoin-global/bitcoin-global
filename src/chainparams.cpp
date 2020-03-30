@@ -200,7 +200,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
     
         // Bitcoin Global hard fork on test chain.
-        consensus.BTGHeight = 1;
+        consensus.BTGHeight = 930000;
         consensus.BTGPremineWindow = 50;
         consensus.BTGPremineEnforceWhitelist = false;
 
@@ -285,7 +285,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // Bitcoin Global hard fork on reg chain.
-        consensus.BTGHeight = 2000;
+        consensus.BTGHeight = 15000;
         consensus.BTGPremineWindow = 50;
         consensus.BTGPremineEnforceWhitelist = false;
 
