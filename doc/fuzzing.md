@@ -17,7 +17,7 @@ Extract the example seeds (or other starting inputs) into the inputs
 directory before starting fuzzing.
 
 ```
-git clone https://github.com/bitcoin-core/qa-assets
+git clone https://github.com/bitcoin-global/qa-assets
 export DIR_FUZZ_IN=$PWD/qa-assets/fuzz_seed_corpus
 ```
 

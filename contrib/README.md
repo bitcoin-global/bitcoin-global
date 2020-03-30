@@ -3,7 +3,7 @@ Repository Tools
 
 ### [Developer tools](/contrib/devtools) ###
 Specific tools for developers working on this repository.
-Additional tools, including the `github-merge.py` script, are available in the [maintainer-tools](https://github.com/bitcoin-core/bitcoin-maintainer-tools) repository.
+Additional tools, including the `github-merge.py` script, are available in the [maintainer-tools](https://github.com/bitcoin-global/bitcoin-maintainer-tools) repository.
 
 ### [Verify-Commits](/contrib/verify-commits) ###
 Tool to verify that every merge commit was signed by a developer using the `github-merge.py` script.
@@ -24,10 +24,10 @@ Build Tools and Keys
 ### Packaging ###
 The [Debian](/contrib/debian) subfolder contains the copyright file.
 
-All other packaging related files can be found in the [bitcoin-core/packaging](https://github.com/bitcoin-core/packaging) repository.
+All other packaging related files can be found in the [bitcoin-global/packaging](https://github.com/bitcoin-global/packaging) repository.
 
 ### [Gitian-descriptors](/contrib/gitian-descriptors) ###
-Files used during the gitian build process. For more information about gitian, see the [the Bitcoin Global documentation repository](https://github.com/bitcoin-core/docs).
+Files used during the gitian build process. For more information about gitian, see the [the Bitcoin Global documentation repository](https://github.com/bitcoin-global/docs).
 
 ### [Gitian-keys](/contrib/gitian-keys)
 PGP keys used for signing Bitcoin Global [Gitian release](/doc/release-process.md) results.

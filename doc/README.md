@@ -44,7 +44,7 @@ The following are developer notes on how to build Bitcoin Global on your native 
 - [FreeBSD Build Notes](build-freebsd.md)
 - [OpenBSD Build Notes](build-openbsd.md)
 - [NetBSD Build Notes](build-netbsd.md)
-- [Gitian Building Guide (External Link)](https://github.com/bitcoin-core/docs/blob/master/gitian-building.md)
+- [Gitian Building Guide (External Link)](https://github.com/bitcoin-global/docs/blob/master/gitian-building.md)
 
 Development
 ---------------------
