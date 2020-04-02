@@ -285,9 +285,9 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // Bitcoin Global hard fork on reg chain.
-        consensus.BTGHeight = 15000;
+        consensus.BTGHeight = 3000;
         consensus.BTGPremineWindow = 50;
-        consensus.BTGPremineEnforceWhitelist = false;
+        consensus.BTGPremineEnforceWhitelist = true;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
@@ -337,6 +337,11 @@ public:
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
         bech32_hrp = "globr";
+
+        // Premine PubKeys for coin distribution.
+        vPreminePubkeys = {
+            "022df9dd6c032bb01871e0a46ccc305bd80b32daf2230fb917725539a0bbebca19", "03317341a33373f319a3520662faa85a0231d3259a287d06cbfa943f620c1e7471", "02f591d3ffbcd00a988acd1c35dd1fdba3d33833fb7a9132633a83a0e2363edc15", "03642391def4438c925feaa3c6f9fef65a5295a100f69afb9aa90934e2cbefc6c5", "02b024335bbed2f74b2133e7a515ce0089c48fafb20413de6769a2817cc2a9a289"
+        };
     }
 
     /**
@@ -423,8 +428,7 @@ bool CChainParams::IsPremineAddressScript(const CScript& scriptPubKey, uint32_t 
     // assert(vPreminePubkeys.size() == 100);
 
     int block = height - consensus.BTGHeight;
-    const std::string vPreminePubkey = vPreminePubkeys[block % vPreminePubkeys.size()];  // Round robin.
-    CScript redeem_script = CScript() << ToByteVector(ParseHex(vPreminePubkey)) << OP_CHECKSIG;
-    CScript target_scriptPubkey = GetScriptForWitness(redeem_script);
-    return scriptPubKey == target_scriptPubkey;
+    CPubKey vPreminePubkey = CPubKey(ParseHex(vPreminePubkeys[block % vPreminePubkeys.size()]));  // Round robin.
+    CScript target_scriptPubKey = GetScriptForRawPubKey(vPreminePubkey);
+    return target_scriptPubKey == scriptPubKey;
 }
