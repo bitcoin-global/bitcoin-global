@@ -14,6 +14,7 @@
 #include <script/standard.h>
 
 #include <assert.h>
+#include <pubkey.h>
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
