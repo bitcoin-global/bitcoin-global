@@ -1,7 +1,7 @@
 # It is not recommended to modify this file in-place, because it will
 # be overwritten during package upgrades. If you want to add further
 # options or overwrite existing ones then use
-# $ systemctl edit glbitcoind.service
+# $ systemctl edit bitglobd.service
 # See "man systemd.service" for details.
 
 # Note that almost all daemon options could be specified in
@@ -14,10 +14,10 @@ Description=Bitcoin daemon
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/glbitcoind -daemon \
-                            -pid=/run/glbitcoind/glbitcoind.pid \
+ExecStart=/usr/bin/bitglobd -daemon \
+                            -pid=/run/bitglobd/bitglobd.pid \
                             -conf=/etc/bitcoin/bitcoin.conf \
-                            -datadir=/var/lib/glbitcoind
+                            -datadir=/var/lib/bitglobd
 
 # Make sure the config directory is readable by the service user
 PermissionsStartOnly=true
@@ -27,7 +27,7 @@ ExecStartPre=/bin/chgrp bitcoin /etc/bitglobal
 ####################
 
 Type=forking
-PIDFile=/run/glbitcoind/glbitcoind.pid
+PIDFile=/run/bitglobd/bitglobd.pid
 Restart=on-failure
 
 # Directory creation and permissions
@@ -37,16 +37,16 @@ Restart=on-failure
 User=bitglobal
 Group=bitglobal
 
-# /run/glbitcoind
-RuntimeDirectory=glbitcoind
+# /run/bitglobd
+RuntimeDirectory=bitglobd
 RuntimeDirectoryMode=0710
 
 # /etc/bitglobal
 ConfigurationDirectory=bitcoin
 ConfigurationDirectoryMode=0710
 
-# /var/lib/glbitcoind
-StateDirectory=glbitcoind
+# /var/lib/bitglobd
+StateDirectory=bitglobd
 StateDirectoryMode=0710
 
 # Hardening measures

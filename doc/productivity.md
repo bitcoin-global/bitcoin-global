@@ -73,7 +73,7 @@ When rebuilding during development, note that running `make`, without giving a t
 Obviously, it is important to build and run the tests at appropriate times -- but when you just want a quick compile to check your work, consider picking one or a set of build targets relevant to what you're working on, e.g.:
 
 ```sh
-make src/glbitcoind src/glbitcoin-cli
+make src/bitglobd src/bitglob-cli
 make src/qt/bitcoin-qt
 make -C src bitcoin_bench
 ```

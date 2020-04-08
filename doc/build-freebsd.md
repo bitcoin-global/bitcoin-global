@@ -2,7 +2,7 @@ FreeBSD build guide
 ======================
 (updated for FreeBSD 12.0)
 
-This guide describes how to build glbitcoind and command-line utilities on FreeBSD.
+This guide describes how to build bitglobd and command-line utilities on FreeBSD.
 
 This guide does not contain instructions for building the GUI.
 

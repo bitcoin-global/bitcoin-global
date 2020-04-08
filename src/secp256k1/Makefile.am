@@ -120,7 +120,7 @@ TESTS += exhaustive_tests
 endif
 
 JAVAROOT=src/java
-JAVAORG=org/bitglobal
+JAVAORG=org/bitcoin
 JAVA_GUAVA=$(srcdir)/$(JAVAROOT)/guava/guava-18.0.jar
 CLASSPATH_ENV=CLASSPATH=$(JAVA_GUAVA)
 JAVA_FILES= \

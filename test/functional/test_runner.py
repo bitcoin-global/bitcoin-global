@@ -278,9 +278,9 @@ def main():
 
     logging.debug("Temporary test directory at %s" % tmpdir)
 
-    enable_glbitcoind = config["components"].getboolean("ENABLE_GLBITCOIND")
+    enable_bitglobd = config["components"].getboolean("ENABLE_BITGLOBD")
 
-    if not enable_glbitcoind:
+    if not enable_bitglobd:
         print("No functional tests to run.")
         print("Rerun ./configure with --with-daemon and then make")
         sys.exit(0)
@@ -362,11 +362,11 @@ def main():
 def run_tests(*, test_list, src_dir, build_dir, tmpdir, jobs=1, enable_coverage=False, args=None, combined_logs_len=0, failfast=False, runs_ci, use_term_control):
     args = args or []
 
-    # Warn if glbitcoind is already running
-    # pidof might fail or return an empty string if glbitcoind is not running
+    # Warn if bitglobd is already running
+    # pidof might fail or return an empty string if bitglobd is not running
     try:
-        if subprocess.check_output(["pidof", "glbitcoind"]) not in [b'']:
-            print("%sWARNING!%s There is already a glbitcoind process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
+        if subprocess.check_output(["pidof", "bitglobd"]) not in [b'']:
+            print("%sWARNING!%s There is already a bitglobd process running on this system. Tests may fail unexpectedly due to resource contention!" % (BOLD[1], BOLD[0]))
     except (OSError, subprocess.SubprocessError):
         pass
 
@@ -635,7 +635,7 @@ class RPCCoverage():
     Coverage calculation works by having each test script subprocess write
     coverage files into a particular directory. These files contain the RPC
     commands invoked during testing, as well as a complete listing of RPC
-    commands per `glbitcoin-cli help` (`rpc_interface.txt`).
+    commands per `bitglob-cli help` (`rpc_interface.txt`).
 
     After all tests complete, the commands run are combined and diff'd against
     the complete list to calculate uncovered RPC commands.

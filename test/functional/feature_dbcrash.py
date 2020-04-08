@@ -93,14 +93,14 @@ class ChainstateWriteCrashTest(BitcoinTestFramework):
                 return utxo_hash
             except:
                 # An exception here should mean the node is about to crash.
-                # If glbitcoind exits, then try again.  wait_for_node_exit()
-                # should raise an exception if glbitcoind doesn't exit.
+                # If bitglobd exits, then try again.  wait_for_node_exit()
+                # should raise an exception if bitglobd doesn't exit.
                 self.wait_for_node_exit(node_index, timeout=10)
             self.crashed_on_restart += 1
             time.sleep(1)
 
-        # If we got here, glbitcoind isn't coming back up on restart.  Could be a
-        # bug in glbitcoind, or we've gotten unlucky with our dbcrash ratio --
+        # If we got here, bitglobd isn't coming back up on restart.  Could be a
+        # bug in bitglobd, or we've gotten unlucky with our dbcrash ratio --
         # perhaps we generated a test case that blew up our cache?
         # TODO: If this happens a lot, we should try to restart without -dbcrashratio
         # and make sure that recovery happens.

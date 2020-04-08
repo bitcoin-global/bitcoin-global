@@ -9,7 +9,7 @@
 #include <string>
 
 /**
- * CBaseChainParams defines the base parameters (shared between glbitcoin-cli and glbitcoind)
+ * CBaseChainParams defines the base parameters (shared between bitglob-cli and bitglobd)
  * of a given instance of the Bitcoin system.
  */
 class CBaseChainParams

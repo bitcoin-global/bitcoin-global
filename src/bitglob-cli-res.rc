@@ -17,13 +17,13 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "Bitcoin Global"
-            VALUE "FileDescription",    "glbitcoin-cli (JSON-RPC client for " PACKAGE_NAME ")"
+            VALUE "FileDescription",    "bitglob-cli (JSON-RPC client for " PACKAGE_NAME ")"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "glbitcoin-cli"
+            VALUE "InternalName",       "bitglob-cli"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "glbitcoin-cli.exe"
-            VALUE "ProductName",        "glbitcoin-cli"
+            VALUE "OriginalFilename",   "bitglob-cli.exe"
+            VALUE "ProductName",        "bitglob-cli"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

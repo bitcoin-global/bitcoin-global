@@ -16,7 +16,7 @@ The following are some helpful notes on how to run Bitcoin Global on your native
 Unpack the files into a directory and run:
 
 - `bin/bitcoin-qt` (GUI) or
-- `bin/glbitcoind` (headless)
+- `bin/bitglobd` (headless)
 
 ### Windows
 

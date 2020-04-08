@@ -14,10 +14,10 @@ bool noui_ThreadSafeQuestion(const std::string& /* ignored interactive message *
 /** Non-GUI handler, which only logs a message. */
 void noui_InitMessage(const std::string& message);
 
-/** Connect all glbitcoind signal handlers */
+/** Connect all bitglobd signal handlers */
 void noui_connect();
 
-/** Suppress all glbitcoind signal handlers. Used to suppress output during test runs that produce expected errors */
+/** Suppress all bitglobd signal handlers. Used to suppress output during test runs that produce expected errors */
 void noui_suppress();
 
 /** Reconnects the regular Non-GUI handlers after having used noui_suppress */

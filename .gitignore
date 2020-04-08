@@ -3,8 +3,8 @@
 *.exe
 *.pdb
 src/bitcoin
-src/glbitcoind
-src/glbitcoin-cli
+src/bitglobd
+src/bitglob-cli
 src/bitcoin-tx
 src/bitcoin-wallet
 src/test/test_bitcoin

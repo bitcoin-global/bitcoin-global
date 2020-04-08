@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+#  bitglobd The bitcoin global server.
+#
+#
+# chkconfig: 345 80 20
+# description: bitglobd
+# processname: bitglobd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/bitglobd, see below
+if [ -f /etc/sysconfig/bitglobd ]; then
+        . /etc/sysconfig/bitglobd
+fi
+
+RETVAL=0
+
+prog=bitglobd
+# you can override the lockfile via BITGLOBD_LOCKFILE in /etc/sysconfig/bitglobd
+lockfile=${BITGLOBD_LOCKFILE-/var/lock/subsys/bitglobd}
+
+# bitglobd defaults to /usr/bin/bitglobd, override with BITGLOBD_BIN
+bitglobd=${BITGLOBD_BIN-/usr/bin/bitglobd}
+
+# bitglobd opts default to -disablewallet, override with BITGLOBD_OPTS
+bitglobd_opts=${BITGLOBD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $bitglobd $bitglobd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

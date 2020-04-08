@@ -15,9 +15,9 @@ AC_CONFIG_HEADERS([src/config/bitcoin-config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
-BITCOIN_DAEMON_NAME=glbitcoind
+BITCOIN_DAEMON_NAME=bitglobd
 BITCOIN_GUI_NAME=bitcoin-qt
-GLBITCOIN_CLI_NAME=glbitcoin-cli
+BITGLOB_CLI_NAME=bitglob-cli
 BITCOIN_TX_NAME=bitcoin-tx
 BITCOIN_WALLET_TOOL_NAME=bitcoin-wallet
 
@@ -435,15 +435,15 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build glbitcoin-cli bitcoin-tx bitcoin-wallet (default=yes)])],
+  [build bitglob-cli bitcoin-tx bitcoin-wallet (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
 AC_ARG_ENABLE([util-cli],
   [AS_HELP_STRING([--enable-util-cli],
-  [build glbitcoin-cli])],
-  [build_glbitcoin_cli=$enableval],
-  [build_glbitcoin_cli=$build_bitcoin_utils])
+  [build bitglob-cli])],
+  [build_bitglob_cli=$enableval],
+  [build_bitglob_cli=$build_bitcoin_utils])
 
 AC_ARG_ENABLE([util-tx],
   [AS_HELP_STRING([--enable-util-tx],
@@ -465,9 +465,9 @@ AC_ARG_WITH([libs],
 
 AC_ARG_WITH([daemon],
   [AS_HELP_STRING([--with-daemon],
-  [build glbitcoind daemon (default=yes)])],
-  [build_glbitcoind=$withval],
-  [build_glbitcoind=yes])
+  [build bitglobd daemon (default=yes)])],
+  [build_bitglobd=$withval],
+  [build_bitglobd=yes])
 
 use_pkgconfig=yes
 case $host in
@@ -993,10 +993,10 @@ dnl enable-fuzz should disable all other targets
 if test "x$enable_fuzz" = "xyes"; then
   AC_MSG_WARN(enable-fuzz will disable all other targets)
   build_bitcoin_utils=no
-  build_glbitcoin_cli=no
+  build_bitglob_cli=no
   build_bitcoin_tx=no
   build_bitcoin_wallet=no
-  build_glbitcoind=no
+  build_bitglobd=no
   build_bitcoin_libs=no
   bitcoin_enable_qt=no
   bitcoin_enable_qt_test=no
@@ -1046,7 +1046,7 @@ if test x$have_miniupnpc != xno; then
 fi
 fi
 
-if test x$build_bitcoin_wallet$build_glbitcoin_cli$build_bitcoin_tx$build_glbitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
     use_boost=no
 else
     use_boost=yes
@@ -1236,7 +1236,7 @@ if test x$use_pkgconfig = xyes; then
       if test x$use_qr != xno; then
         BITCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
-      if test x$build_glbitcoin_cli$build_glbitcoind$bitcoin_enable_qt$use_tests != xnononono; then
+      if test x$build_bitglob_cli$build_bitglobd$bitcoin_enable_qt$use_tests != xnononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
         if test x$TARGET_OS != xwindows; then
           PKG_CHECK_MODULES([EVENT_PTHREADS], [libevent_pthreads],, [AC_MSG_ERROR(libevent_pthreads not found.)])
@@ -1261,7 +1261,7 @@ else
   AC_CHECK_HEADER([openssl/ssl.h],, AC_MSG_ERROR(libssl headers missing),)
   AC_CHECK_LIB([ssl],         [main],SSL_LIBS=-lssl, AC_MSG_ERROR(libssl missing))
 
-  if test x$build_glbitcoin_cli$build_glbitcoind$bitcoin_enable_qt$use_tests != xnononono; then
+  if test x$build_bitglob_cli$build_bitglobd$bitcoin_enable_qt$use_tests != xnononono; then
     AC_CHECK_HEADER([event2/event.h],, AC_MSG_ERROR(libevent headers missing),)
     AC_CHECK_LIB([event],[main],EVENT_LIBS=-levent,AC_MSG_ERROR(libevent missing))
     if test x$TARGET_OS != xwindows; then
@@ -1328,7 +1328,7 @@ dnl univalue check
 
 need_bundled_univalue=yes
 
-if test x$build_bitcoin_wallet$build_glbitcoin_cli$build_bitcoin_tx$build_glbitcoind$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
   need_bundled_univalue=no
 else
 
@@ -1378,13 +1378,13 @@ if test x$have_protobuf != xno &&
   BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 fi
 
-AC_MSG_CHECKING([whether to build glbitcoind])
-AM_CONDITIONAL([BUILD_GLBITCOIND], [test x$build_glbitcoind = xyes])
-AC_MSG_RESULT($build_glbitcoind)
+AC_MSG_CHECKING([whether to build bitglobd])
+AM_CONDITIONAL([BUILD_BITGLOBD], [test x$build_bitglobd = xyes])
+AC_MSG_RESULT($build_bitglobd)
 
-AC_MSG_CHECKING([whether to build glbitcoin-cli])
-AM_CONDITIONAL([BUILD_GLBITCOIN_CLI], [test x$build_glbitcoin_cli = xyes])
-AC_MSG_RESULT($build_glbitcoin_cli)
+AC_MSG_CHECKING([whether to build bitglob-cli])
+AM_CONDITIONAL([BUILD_BITGLOB_CLI], [test x$build_bitglob_cli = xyes])
+AC_MSG_RESULT($build_bitglob_cli)
 
 AC_MSG_CHECKING([whether to build bitcoin-tx])
 AM_CONDITIONAL([BUILD_BITCOIN_TX], [test x$build_bitcoin_tx = xyes])
@@ -1536,7 +1536,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_bitcoin_wallet$build_glbitcoin_cli$build_bitcoin_tx$build_bitcoin_libs$build_glbitcoind$bitcoin_enable_qt$use_bench$use_tests = xnononononononono; then
+if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitcoin_libs$build_bitglobd$bitcoin_enable_qt$use_bench$use_tests = xnononononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1581,7 +1581,7 @@ AC_SUBST(COPYRIGHT_HOLDERS_SUBSTITUTION, "_COPYRIGHT_HOLDERS_SUBSTITUTION")
 AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
 AC_SUBST(BITCOIN_DAEMON_NAME)
 AC_SUBST(BITCOIN_GUI_NAME)
-AC_SUBST(GLBITCOIN_CLI_NAME)
+AC_SUBST(BITGLOB_CLI_NAME)
 AC_SUBST(BITCOIN_TX_NAME)
 AC_SUBST(BITCOIN_WALLET_TOOL_NAME)
 

@@ -1,0 +1,92 @@
+#!/sbin/openrc-run
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/bitcoin/.bitglobal" ]; then
+	BITGLOBD_DEFAULT_DATADIR="/var/lib/bitcoin/.bitglobal"
+else
+	BITGLOBD_DEFAULT_DATADIR="/var/lib/bitglobd"
+fi
+
+BITGLOBD_CONFIGFILE=${BITGLOBD_CONFIGFILE:-/etc/bitcoin/bitcoin.conf}
+BITGLOBD_PIDDIR=${BITGLOBD_PIDDIR:-/var/run/bitglobd}
+BITGLOBD_PIDFILE=${BITGLOBD_PIDFILE:-${BITGLOBD_PIDDIR}/bitglobd.pid}
+BITGLOBD_DATADIR=${BITGLOBD_DATADIR:-${BITGLOBD_DEFAULT_DATADIR}}
+BITGLOBD_USER=${BITGLOBD_USER:-${BITCOIN_USER:-bitcoin}}
+BITGLOBD_GROUP=${BITGLOBD_GROUP:-bitcoin}
+BITGLOBD_BIN=${BITGLOBD_BIN:-/usr/bin/bitglobd}
+BITGLOBD_NICE=${BITGLOBD_NICE:-${NICELEVEL:-0}}
+BITGLOBD_OPTS="${BITGLOBD_OPTS:-${BITCOIN_OPTS}}"
+
+name="Bitcoin Global Daemon"
+description="Bitcoin Global cryptocurrency P2P network daemon"
+
+command="/usr/bin/bitglobd"
+command_args="-pid=\"${BITGLOBD_PIDFILE}\" \
+		-conf=\"${BITGLOBD_CONFIGFILE}\" \
+		-datadir=\"${BITGLOBD_DATADIR}\" \
+		-daemon \
+		${BITGLOBD_OPTS}"
+
+required_files="${BITGLOBD_CONFIGFILE}"
+start_stop_daemon_args="-u ${BITGLOBD_USER} \
+			-N ${BITGLOBD_NICE} -w 2000"
+pidfile="${BITGLOBD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${BITGLOBD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${BITGLOBD_USER}:${BITGLOBD_GROUP}" \
+	"${BITGLOBD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${BITGLOBD_USER}:${BITGLOBD_GROUP}" \
+	"${BITGLOBD_PIDDIR}"
+
+	checkpath -f \
+	-o ${BITGLOBD_USER}:${BITGLOBD_GROUP} \
+	-m 0660 \
+	${BITGLOBD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${BITGLOBD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run bitglobd."
+		eerror "The setting must appear in ${BITGLOBD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Bitcoin Global Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}
