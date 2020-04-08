@@ -380,6 +380,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     </context>
 </TS>

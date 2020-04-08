@@ -27,7 +27,7 @@ RCSUBDIR="test"
 HOST1="https://bitcoincore.org"
 HOST2="https://bitcoin.org"
 BASEDIR="/bin/"
-VERSIONPREFIX="bitcoin-core-"
+VERSIONPREFIX="bitcoin-global-"
 RCVERSIONSTRING="rc"
 
 if [ ! -d "$WORKINGDIR" ]; then

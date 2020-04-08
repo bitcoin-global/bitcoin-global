@@ -41,6 +41,7 @@ export SDK_URL=${SDK_URL:-https://bitcoin-global.io/depends-sources/sdks}
 export WINEDEBUG=${WINEDEBUG:-fixme-all}
 export DOCKER_PACKAGES=${DOCKER_PACKAGES:-build-essential libtool autotools-dev automake pkg-config bsdmainutils curl ca-certificates ccache python3}
 export GOAL=${GOAL:-install}
+# TODO: add bitcoin global qa blobs
 export DIR_QA_ASSETS=${DIR_QA_ASSETS:-${BASE_BUILD_DIR}/qa-assets}
 export PATH=${BASE_ROOT_DIR}/ci/retry:$PATH
 export CI_RETRY_EXE=${CI_RETRY_EXE:retry}

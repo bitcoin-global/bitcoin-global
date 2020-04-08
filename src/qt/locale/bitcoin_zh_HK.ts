@@ -346,8 +346,8 @@
         <translation>說明 &amp;H</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>要求付款 (產生QR碼 bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and bitglobal: URIs)</source>
+        <translation>要求付款 (產生QR碼 bitglobal: URIs)</translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -662,6 +662,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     </context>
 </TS>

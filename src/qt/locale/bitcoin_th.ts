@@ -330,8 +330,8 @@
         <translation>แถบเครื่องมือ</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>เรียกเก็บ การชำระเงิน (สร้าง QR codes และ bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and bitglobal: URIs)</source>
+        <translation>เรียกเก็บ การชำระเงิน (สร้าง QR codes และ bitglobal: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -342,8 +342,8 @@
         <translation>แสดงรายการ ที่เก็บเงินที่จะรับ bitcoin เข้า และป้ายชื่อ ที่ใช้ไปแล้ว</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>เปิด bitcoin: URI หรือ การเรียกเก็บเงิน (การเรียกให้ชำระเงิน)</translation>
+        <source>Open a bitglobal: URI or payment request</source>
+        <translation>เปิด bitglobal: URI หรือ การเรียกเก็บเงิน (การเรียกให้ชำระเงิน)</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -1090,6 +1090,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     </context>
 </TS>

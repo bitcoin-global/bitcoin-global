@@ -390,8 +390,8 @@
         <translation>Lajsta szkart</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Żōndej płatu (gyneruje kod QR jak tyż URI bitcoin:)</translation>
+        <source>Request payments (generates QR codes and bitglobal: URIs)</source>
+        <translation>Żōndej płatu (gyneruje kod QR jak tyż URI bitglobal:)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -402,8 +402,8 @@
         <translation>Pokŏż wykŏz adres i etyket użytych do ôdbiyraniŏ</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Ôdewrzij URI bitcoin: abo żōndanie płatu</translation>
+        <source>Open a bitglobal: URI or payment request</source>
+        <translation>Ôdewrzij URI bitglobal: abo żōndanie płatu</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -1169,8 +1169,8 @@
         <translation>Bedynōng URI</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin://' to niyma nŏleżne URI. Użyj 'bitcoin:'.</translation>
+        <source>'bitglobal://' is not a valid URI. Use 'bitglobal:' instead.</source>
+        <translation>'bitglobal://' to niyma nŏleżne URI. Użyj 'bitglobal:'.</translation>
     </message>
     <message>
         <source>Payment request network doesn't match client network.</source>
@@ -1680,8 +1680,8 @@
         <translation>Wiadōmość:</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Wiadōmość, kerŏ ôstała prziwstōnŏ do URI bitcoin:, kerŏ bydzie przechowowanŏ z transakcyjōm w cylach informacyjnych. Napōmniynie: Ta wiadōmość niy bydzie rozszyrzowanŏ w necu Bitcoin.</translation>
+        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <translation>Wiadōmość, kerŏ ôstała prziwstōnŏ do URI bitglobal:, kerŏ bydzie przechowowanŏ z transakcyjōm w cylach informacyjnych. Napōmniynie: Ta wiadōmość niy bydzie rozszyrzowanŏ w necu Bitcoin.</translation>
     </message>
     </context>
 <context>
@@ -1944,7 +1944,7 @@
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     <message>
         <source>The %s developers</source>
         <translation>Twōrcy %s</translation>

@@ -3,8 +3,8 @@
 *.exe
 *.pdb
 src/bitcoin
-src/bitcoind
-src/bitcoin-cli
+src/glbitcoind
+src/glbitcoin-cli
 src/bitcoin-tx
 src/bitcoin-wallet
 src/test/test_bitcoin
@@ -89,7 +89,7 @@ src/qt/bitcoin-qt.includes
 Makefile
 !depends/Makefile
 bitcoin-qt
-Bitcoin-Qt.app
+Bitcoin-Global-Qt.app
 background.tiff*
 
 # Qt Creator

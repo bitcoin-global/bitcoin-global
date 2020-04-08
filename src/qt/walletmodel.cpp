@@ -258,7 +258,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction &tran
             }
             else
 #endif
-            if (!rcp.message.isEmpty()) // Message from normal bitcoin:URI (bitcoin:123...?message=example)
+            if (!rcp.message.isEmpty()) // Message from normal bitglobal:URI (bitglobal:123...?message=example)
                 vOrderForm.emplace_back("Message", rcp.message.toStdString());
         }
 

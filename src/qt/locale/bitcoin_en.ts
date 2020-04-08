@@ -546,7 +546,7 @@
     </message>
     <message>
         <location line="-257"/>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
+        <source>Request payments (generates QR codes and bitglobal: URIs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -561,7 +561,7 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Open a bitcoin: URI or payment request</source>
+        <source>Open a bitglobal: URI or payment request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1861,7 +1861,7 @@
     </message>
     <message>
         <location line="-531"/>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
+        <source>Cannot start bitglobal: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1876,7 +1876,7 @@
     </message>
     <message>
         <location line="-55"/>
-        <source>&apos;bitcoin://&apos; is not a valid URI. Use &apos;bitcoin:&apos; instead.</source>
+        <source>&apos;bitglobal://&apos; is not a valid URI. Use &apos;bitglobal:&apos; instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3337,7 +3337,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     </message>
     <message>
         <location line="+54"/>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4294,7 +4294,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+28"/>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>

@@ -16,7 +16,7 @@ The following are some helpful notes on how to run Bitcoin Global on your native
 Unpack the files into a directory and run:
 
 - `bin/bitcoin-qt` (GUI) or
-- `bin/bitcoind` (headless)
+- `bin/glbitcoind` (headless)
 
 ### Windows
 
@@ -66,7 +66,7 @@ The Bitcoin repo's [root README](/README.md) contains relevant information on th
 
 ### Resources
 * Discuss on the [BitcoinTalk](https://bitcointalk.org/) forums, in the [Development & Technical Discussion board](https://bitcointalk.org/index.php?board=6.0).
-* Discuss project-specific development on #bitcoin-core-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=bitcoin-core-dev).
+* Discuss project-specific development on #bitcoin-global-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=bitcoin-global-dev).
 * Discuss general Bitcoin development on #bitcoin-dev on Freenode. If you don't have an IRC client, use [webchat here](http://webchat.freenode.net/?channels=bitcoin-dev).
 
 ### Miscellaneous

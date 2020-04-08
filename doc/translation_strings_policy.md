@@ -1,7 +1,7 @@
 Translation Strings Policy
 ===========================
 
-This document provides guidelines for internationalization of the Bitcoin Core software.
+This document provides guidelines for internationalization of the Bitcoin Global software.
 
 How to translate?
 ------------------

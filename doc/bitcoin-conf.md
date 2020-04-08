@@ -1,6 +1,6 @@
 # `bitcoin.conf` Configuration File
 
-The configuration file is used by `bitcoind`, `bitcoin-qt` and `bitcoin-cli`.
+The configuration file is used by `glbitcoind`, `bitcoin-qt` and `glbitcoin-cli`.
 
 All command-line options (except for `-?`, `-help`, `-version` and `-conf`) may be specified in a configuration file, and all configuration file options (except for `includeconf`) may also be specified on the command line. Command-line options override values set in the configuration file and configuration file options override values set in the GUI.
 
@@ -56,7 +56,7 @@ The `includeconf=<file>` option in the `bitcoin.conf` file can be used to includ
 Operating System | Data Directory | Example Path
 -- | -- | --
 Windows | `%APPDATA%\Bitcoin\` | `C:\Users\username\AppData\Roaming\Bitcoin\bitcoin.conf`
-Linux | `$HOME/.bitcoin/` | `/home/username/.bitcoin/bitcoin.conf`
+Linux | `$HOME/.bitglobal/` | `/home/username/.bitglobal/bitcoin.conf`
 macOS | `$HOME/Library/Application Support/Bitcoin/` | `/Users/username/Library/Application Support/Bitcoin/bitcoin.conf`
 
 You can find an example bitcoin.conf file in [share/examples/bitcoin.conf](../share/examples/bitcoin.conf).

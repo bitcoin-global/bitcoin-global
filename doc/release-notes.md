@@ -10,7 +10,7 @@ improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/bitcoin/bitcoin/issues>
+  <https://github.com/bitcoin-global/bitcoin-global/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -21,8 +21,8 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
-or `bitcoind`/`bitcoin-qt` (on Linux).
+installer (on Windows) or just copy over `/Applications/Bitcoin-Global-Qt` (on Mac)
+or `glbitcoind`/`bitcoin-qt` (on Linux).
 
 Upgrading directly from a version of Bitcoin Core that has reached its EOL is
 possible, but it might take some time if the datadir needs to be migrated. Old
@@ -72,7 +72,7 @@ distribution provides binaries for the RISC-V platform.
 
 ### Tests and QA
 - #17416 Appveyor improvement - text file for vcpkg package list (sipsorcery)
-- #17488 fix "bitcoind already running" warnings on macOS (fanquake)
+- #17488 fix "glbitcoind already running" warnings on macOS (fanquake)
 - #17980 add missing #include to fix compiler errors (kallewoof)
 
 ### Platform support

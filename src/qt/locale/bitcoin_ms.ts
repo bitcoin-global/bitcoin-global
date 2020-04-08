@@ -389,8 +389,8 @@ Alihkan fail data ke dalam tab semasa</translation>
 </translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Request payments (generates QR codes and bitcoin: URIs)
+        <source>Request payments (generates QR codes and bitglobal: URIs)</source>
+        <translation>Request payments (generates QR codes and bitglobal: URIs)
 </translation>
     </message>
     <message>
@@ -645,7 +645,7 @@ Alihkan fail data ke dalam tab semasa</translation>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>bitcoin-global</name>
     <message>
         <source>Loading wallet...</source>
         <translation>Sedang baca wallet...</translation>

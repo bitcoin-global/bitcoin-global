@@ -156,7 +156,7 @@ protobuf (optional) can be installed with:
 
 Notes
 -----
-The release is built with GCC and then "strip bitcoind" to strip the debug
+The release is built with GCC and then "strip glbitcoind" to strip the debug
 symbols, which reduces the executable size by about 90%.
 
 
@@ -219,7 +219,7 @@ Hardening enables the following features:
 
     To test that you have built PIE executable, install scanelf, part of paxutils, and use:
 
-    	scanelf -e ./bitcoin
+    	scanelf -e ./bitglobal
 
     The output should contain:
 
@@ -264,8 +264,8 @@ Setup and Build Example: Arch Linux
 This example lists the steps necessary to setup and build a command line only, non-wallet distribution of the latest changes on Arch Linux:
 
     pacman -S git base-devel boost libevent python
-    git clone https://github.com/bitcoin-global/bitcoin-global-playground.git
-    cd bitcoin/
+    git clone https://github.com/bitcoin-global/bitcoin-global.git
+    cd bitcoin-global/
     ./autogen.sh
     ./configure --disable-wallet --without-gui --without-miniupnpc
     make check

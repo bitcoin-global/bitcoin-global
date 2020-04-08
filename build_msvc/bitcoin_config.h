@@ -340,7 +340,7 @@
 #define LT_OBJDIR ".libs/"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "https://github.com/bitcoin-global/bitcoin-global-playground/issues"
+#define PACKAGE_BUGREPORT "https://github.com/bitcoin-global/bitcoin-global/issues"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "Bitcoin Global"
@@ -349,7 +349,7 @@
 #define PACKAGE_STRING "Bitcoin Global 0.19.0"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "bitcoin"
+#define PACKAGE_TARNAME "bitglobal"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL "https://bitcoin-global.io/"

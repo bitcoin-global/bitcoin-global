@@ -1,7 +1,7 @@
 Benchmarking
 ============
 
-Bitcoin Core has an internal benchmarking framework, with benchmarks
+Bitcoin Global has an internal benchmarking framework, with benchmarks
 for cryptographic algorithms (e.g. SHA1, SHA256, SHA512, RIPEMD160, Poly1305, ChaCha20), rolling bloom filter, coins selection,
 thread queue, wallet balance.
 
@@ -13,7 +13,7 @@ benchmarking by unlatching log printers and lock analysis.
 
     make -C src bench_bitcoin
 
-After compiling bitcoin-core, the benchmarks can be run with:
+After compiling bitcoin-global, the benchmarks can be run with:
 
     src/bench/bench_bitcoin
 
@@ -43,6 +43,6 @@ More benchmarks are needed for, in no particular order:
 Going Further
 --------------------
 
-To monitor Bitcoin Core performance more in depth (like reindex or IBD): https://github.com/chaincodelabs/bitcoinperf
+To monitor Bitcoin Global performance more in depth (like reindex or IBD): https://github.com/chaincodelabs/bitcoinperf
 
-To generate Flame Graphs for Bitcoin Core: https://github.com/eklitzke/bitcoin/blob/flamegraphs/doc/flamegraphs.md
+To generate Flame Graphs for Bitcoin Global: https://github.com/eklitzke/bitcoin/blob/flamegraphs/doc/flamegraphs.md

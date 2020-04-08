@@ -1,5 +1,5 @@
 ---
-name: "bitcoin-win-signer"
+name: "bitcoin-global-win-signer"
 distro: "ubuntu"
 suites:
 - "bionic"
@@ -15,7 +15,7 @@ remotes:
 files:
 - "osslsigncode-1.7.1.tar.gz"
 - "osslsigncode-Backports-to-1.7.1.patch"
-- "bitcoin-win-unsigned.tar.gz"
+- "bitcoin-global-win-unsigned.tar.gz"
 script: |
   set -e -o pipefail
 

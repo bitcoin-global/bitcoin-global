@@ -26,7 +26,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin-global/bitcoin-global-playground/tags) are created
+completely stable. [Tags](https://github.com/bitcoin-global/bitcoin-global/tags) are created
 regularly to indicate new official, stable release versions of Bitcoin Global.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)

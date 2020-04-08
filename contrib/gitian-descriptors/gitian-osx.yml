@@ -1,5 +1,5 @@
 ---
-name: "bitcoin-core-osx-0.19"
+name: "bitcoin-global-osx-0.19"
 enable_cache: true
 distro: "ubuntu"
 suites:
@@ -29,8 +29,8 @@ packages:
 - "python3-setuptools"
 - "fonts-tuffy"
 remotes:
-- "url": "https://github.com/bitcoin-global/bitcoin-global-playground.git"
-  "dir": "bitcoin"
+- "url": "https://github.com/bitcoin-global/bitcoin-global.git"
+  "dir": "bitcoin-global"
 files:
 - "MacOSX10.11.sdk.tar.gz"
 script: |
@@ -85,7 +85,7 @@ script: |
   create_per-host_faketime_wrappers "2000-01-01 12:00:00"
   export PATH=${WRAP_DIR}:${PATH}
 
-  cd bitcoin
+  cd bitcoin-global
   BASEPREFIX=`pwd`/depends
 
   mkdir -p ${BASEPREFIX}/SDKs

@@ -54,7 +54,7 @@ def set_common_properties(toolset):
         wfile.write(s)
 
 def main():
-    parser = argparse.ArgumentParser(description='Bitcoin-core msbuild configuration initialiser.')
+    parser = argparse.ArgumentParser(description='Bitcoin-Global msbuild configuration initialiser.')
     parser.add_argument('-toolset', nargs='?',help='Optionally sets the msbuild platform toolset, e.g. v142 for Visual Studio 2019.'
          ' default is %s.'%DEFAULT_PLATFORM_TOOLSET)
     args = parser.parse_args()
