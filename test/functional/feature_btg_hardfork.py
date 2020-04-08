@@ -6,8 +6,6 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 
-from decimal import Decimal
-from test_framework.key import ECKey
 from test_framework.blocktools import create_coinbase
 from test_framework.messages import CBlock
 from test_framework.script import CScript, OP_NOP, OP_RETURN
@@ -105,7 +103,7 @@ class BTGForkTest(BitcoinTestFramework):
 
         # (3) fail mining block for various reasons
         self.log.info('test premine validation')
-        
+
         # (4) generate premine block, should fail
         assert_raises_rpc_error(-1, "bad-premine-coinbase-output", node.generate, 1)
 
@@ -133,7 +131,7 @@ class BTGForkTest(BitcoinTestFramework):
         node.generate(10)
         self.submitblock_for_coinbase([fail_tx1])
         assert_equal(self.submitblock_for_coinbase([fail_tx1, fail_tx2]), "bad-cb-multiple")
-        
+
         # (10) verify current stats
         tmpl = self.nodes[0].getblock(self.nodes[0].getbestblockhash())
         assert_equal(tmpl["height"], BTG_HARDFORK_HEIGHT + BTG_HARDFORK_LENGTH + 9)
