@@ -87,8 +87,9 @@ public:
 
         // Bitcoin Global hard fork.
         consensus.BTGHeight = 630000; //  13 May 2020 01:11:06 UTC
-        consensus.BTGPremineWindow = 16000; // for 6.25 qb per block
+        consensus.BTGPremineWindow = 100;
         consensus.BTGPremineEnforceWhitelist = true;
+        consensus.BTGPremineReward = 1000;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000008ea3cf107ae0dec57f03fe8");
@@ -204,6 +205,7 @@ public:
         consensus.BTGHeight = 930000;
         consensus.BTGPremineWindow = 50;
         consensus.BTGPremineEnforceWhitelist = false;
+        consensus.BTGPremineReward = 1000;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000012b2a3a62424f21c918");
@@ -289,6 +291,7 @@ public:
         consensus.BTGHeight = 3000;
         consensus.BTGPremineWindow = 50;
         consensus.BTGPremineEnforceWhitelist = true;
+        consensus.BTGPremineReward = 100;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");

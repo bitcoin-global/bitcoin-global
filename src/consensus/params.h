@@ -69,6 +69,7 @@ struct Params {
     int BTGHeight;
     /** Premining blocks for Bitcoin Global hard fork **/
     int BTGPremineWindow;
+    int BTGPremineReward;
     bool BTGPremineEnforceWhitelist;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,

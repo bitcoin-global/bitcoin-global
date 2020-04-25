@@ -345,6 +345,13 @@ bool static IsBTGHardForkEnabled(int nHeight, const Consensus::Params& params) {
     return nHeight >= params.BTGHeight;
 }
 
+/* Verifying if the Bitcoin Global premine period is currently active. */
+bool static IsBTGPremineActive(int nHeight, const Consensus::Params& params) {
+    return (nHeight >= params.BTGHeight &&
+        nHeight < params.BTGHeight + params.BTGPremineWindow &&
+        params.BTGPremineEnforceWhitelist);
+}
+
 bool IsBTGHardForkEnabled(const CBlockIndex* pindexPrev, const Consensus::Params& params) {
     if (pindexPrev == nullptr) {
         return false;
@@ -1263,6 +1270,12 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
+
+    // During BTG Hard Fork premine period, Block Reward is increased
+    // as it will not be mined on standard blocks.
+    if (IsBTGPremineActive(nHeight, consensusParams))
+        return consensusParams.BTGPremineReward * COIN;
+
     return nSubsidy;
 }
 
@@ -3517,9 +3530,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     }
 
     // Bitcoin Global hard fork premine rules
-    if (nHeight >= consensusParams.BTGHeight &&
-        nHeight < consensusParams.BTGHeight + consensusParams.BTGPremineWindow &&
-        consensusParams.BTGPremineEnforceWhitelist)
+    if (IsBTGPremineActive(nHeight, consensusParams))
     {
         if (block.vtx[0]->vout.size() != 1) {
             return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-premine-coinbase-output", "only one coinbase output is allowed");
@@ -3577,7 +3588,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     // Bitcoin Global hard fork consensus rules
     if (IsBTGHardForkEnabled(nHeight, consensusParams)) {
         if (GetBlockWeight(block) > MAX_BTG_BLOCK_WEIGHT) {
-            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-btg-blk-weight", strprintf("%s : weight limit failed", __func__));
+            return state.Invalid(ValidationInvalidReason::CONSENSUS, false, REJECT_INVALID, "bad-blk-weight", strprintf("%s : weight limit failed", __func__));
         }
     }
     else if (GetBlockWeight(block) > MAX_BLOCK_WEIGHT) {
