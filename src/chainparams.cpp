@@ -86,7 +86,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // Bitcoin Global hard fork.
-        consensus.BTGHeight = 630000; //  13 May 2020 01:11:06 UTC
+        consensus.BTGHeight = 630010;
         consensus.BTGPremineWindow = 100;
         consensus.BTGPremineEnforceWhitelist = true;
         consensus.BTGPremineReward = 1000;
