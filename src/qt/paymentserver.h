@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_PAYMENTSERVER_H
-#define BITCOIN_QT_PAYMENTSERVER_H
+#ifndef BITGLOB_QT_PAYMENTSERVER_H
+#define BITGLOB_QT_PAYMENTSERVER_H
 
 // This class handles payment requests from clicking on
 // bitglobal: URIs
@@ -157,4 +157,4 @@ private:
 #endif
 };
 
-#endif // BITCOIN_QT_PAYMENTSERVER_H
+#endif // BITGLOB_QT_PAYMENTSERVER_H

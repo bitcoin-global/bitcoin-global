@@ -9,7 +9,7 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\bitcoin-cli.cpp" />
+    <ClCompile Include="..\..\src\bitglob-cli.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libbitcoin_cli\libbitcoin_cli.vcxproj">

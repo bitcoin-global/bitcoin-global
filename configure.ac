@@ -16,10 +16,10 @@ AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([build-aux/m4])
 
 BITCOIN_DAEMON_NAME=bitglobd
-BITCOIN_GUI_NAME=bitcoin-qt
+BITCOIN_GUI_NAME=bitglob-qt
 BITGLOB_CLI_NAME=bitglob-cli
-BITCOIN_TX_NAME=bitcoin-tx
-BITCOIN_WALLET_TOOL_NAME=bitcoin-wallet
+BITGLOB_TX_NAME=bitglob-tx
+BITGLOB_WALLET_TOOL_NAME=bitglob-wallet
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
@@ -435,7 +435,7 @@ CPPFLAGS="$CPPFLAGS -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build bitglob-cli bitcoin-tx bitcoin-wallet (default=yes)])],
+  [build bitglob-cli bitglob-tx bitglob-wallet (default=yes)])],
   [build_bitcoin_utils=$withval],
   [build_bitcoin_utils=yes])
 
@@ -447,15 +447,15 @@ AC_ARG_ENABLE([util-cli],
 
 AC_ARG_ENABLE([util-tx],
   [AS_HELP_STRING([--enable-util-tx],
-  [build bitcoin-tx])],
-  [build_bitcoin_tx=$enableval],
-  [build_bitcoin_tx=$build_bitcoin_utils])
+  [build bitglob-tx])],
+  [build_bitglob_tx=$enableval],
+  [build_bitglob_tx=$build_bitcoin_utils])
 
 AC_ARG_ENABLE([util-wallet],
   [AS_HELP_STRING([--enable-util-wallet],
-  [build bitcoin-wallet])],
-  [build_bitcoin_wallet=$enableval],
-  [build_bitcoin_wallet=$build_bitcoin_utils])
+  [build bitglob-wallet])],
+  [build_bitglob_wallet=$enableval],
+  [build_bitglob_wallet=$build_bitcoin_utils])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
@@ -994,8 +994,8 @@ if test "x$enable_fuzz" = "xyes"; then
   AC_MSG_WARN(enable-fuzz will disable all other targets)
   build_bitcoin_utils=no
   build_bitglob_cli=no
-  build_bitcoin_tx=no
-  build_bitcoin_wallet=no
+  build_bitglob_tx=no
+  build_bitglob_wallet=no
   build_bitglobd=no
   build_bitcoin_libs=no
   bitcoin_enable_qt=no
@@ -1006,10 +1006,10 @@ if test "x$enable_fuzz" = "xyes"; then
   use_upnp=no
   use_zmq=no
 else
-  BITCOIN_QT_INIT
+  BITGLOB_QT_INIT
 
   dnl sets $bitcoin_enable_qt, $bitcoin_enable_qt_test, $bitcoin_enable_qt_dbus
-  BITCOIN_QT_CONFIGURE([$use_pkgconfig])
+  BITGLOB_QT_CONFIGURE([$use_pkgconfig])
 fi
 
 if test x$enable_wallet != xno; then
@@ -1046,7 +1046,7 @@ if test x$have_miniupnpc != xno; then
 fi
 fi
 
-if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_bitglob_wallet$build_bitglob_cli$build_bitglob_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
     use_boost=no
 else
     use_boost=yes
@@ -1231,10 +1231,10 @@ if test x$use_pkgconfig = xyes; then
       PKG_CHECK_MODULES([SSL], [libssl],, [AC_MSG_ERROR(openssl not found.)])
       PKG_CHECK_MODULES([CRYPTO], [libcrypto],,[AC_MSG_ERROR(libcrypto not found.)])
       if test x$enable_bip70 != xno; then
-        BITCOIN_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [have_protobuf=no])])
+        BITGLOB_QT_CHECK([PKG_CHECK_MODULES([PROTOBUF], [protobuf], [have_protobuf=yes], [have_protobuf=no])])
       fi
       if test x$use_qr != xno; then
-        BITCOIN_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
+        BITGLOB_QT_CHECK([PKG_CHECK_MODULES([QR], [libqrencode], [have_qrencode=yes], [have_qrencode=no])])
       fi
       if test x$build_bitglob_cli$build_bitglobd$bitcoin_enable_qt$use_tests != xnononono; then
         PKG_CHECK_MODULES([EVENT], [libevent],, [AC_MSG_ERROR(libevent not found.)])
@@ -1293,11 +1293,11 @@ else
   fi
 
   if test x$enable_bip70 != xno; then
-    BITCOIN_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], [have_protobuf=no]))
+    BITGLOB_QT_CHECK(AC_CHECK_LIB([protobuf] ,[main],[PROTOBUF_LIBS=-lprotobuf], [have_protobuf=no]))
   fi
   if test x$use_qr != xno; then
-    BITCOIN_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
-    BITCOIN_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
+    BITGLOB_QT_CHECK([AC_CHECK_LIB([qrencode], [main],[QR_LIBS=-lqrencode], [have_qrencode=no])])
+    BITGLOB_QT_CHECK([AC_CHECK_HEADER([qrencode.h],, have_qrencode=no)])
   fi
 fi
 
@@ -1328,7 +1328,7 @@ dnl univalue check
 
 need_bundled_univalue=yes
 
-if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
+if test x$build_bitglob_wallet$build_bitglob_cli$build_bitglob_tx$build_bitglobd$bitcoin_enable_qt$use_tests$use_bench = xnonononononono; then
   need_bundled_univalue=no
 else
 
@@ -1375,7 +1375,7 @@ AC_SUBST(UNIVALUE_LIBS)
 
 if test x$have_protobuf != xno &&
    test x$enable_bip70 != xno; then
-  BITCOIN_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
+  BITGLOB_QT_PATH_PROGS([PROTOC], [protoc],$protoc_bin_path)
 fi
 
 AC_MSG_CHECKING([whether to build bitglobd])
@@ -1386,13 +1386,13 @@ AC_MSG_CHECKING([whether to build bitglob-cli])
 AM_CONDITIONAL([BUILD_BITGLOB_CLI], [test x$build_bitglob_cli = xyes])
 AC_MSG_RESULT($build_bitglob_cli)
 
-AC_MSG_CHECKING([whether to build bitcoin-tx])
-AM_CONDITIONAL([BUILD_BITCOIN_TX], [test x$build_bitcoin_tx = xyes])
-AC_MSG_RESULT($build_bitcoin_tx)
+AC_MSG_CHECKING([whether to build bitglob-tx])
+AM_CONDITIONAL([BUILD_BITGLOB_TX], [test x$build_bitglob_tx = xyes])
+AC_MSG_RESULT($build_bitglob_tx)
 
-AC_MSG_CHECKING([whether to build bitcoin-wallet])
-AM_CONDITIONAL([BUILD_BITCOIN_WALLET], [test x$build_bitcoin_wallet = xyes])
-AC_MSG_RESULT($build_bitcoin_wallet)
+AC_MSG_CHECKING([whether to build bitglob-wallet])
+AM_CONDITIONAL([BUILD_BITGLOB_WALLET], [test x$build_bitglob_wallet = xyes])
+AC_MSG_RESULT($build_bitglob_wallet)
 
 AC_MSG_CHECKING([whether to build libraries])
 AM_CONDITIONAL([BUILD_BITCOIN_LIBS], [test x$build_bitcoin_libs = xyes])
@@ -1492,7 +1492,7 @@ if test x$bitcoin_enable_qt != xno; then
     AC_MSG_WARN("xgettext is required to update qt translations")
   fi
 
-  AC_MSG_CHECKING([whether to build test_bitcoin-qt])
+  AC_MSG_CHECKING([whether to build test_bitglob-qt])
   if test x$use_gui_tests$bitcoin_enable_qt_test = xyesyes; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
@@ -1536,7 +1536,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test x$build_bitcoin_wallet$build_bitglob_cli$build_bitcoin_tx$build_bitcoin_libs$build_bitglobd$bitcoin_enable_qt$use_bench$use_tests = xnononononononono; then
+if test x$build_bitglob_wallet$build_bitglob_cli$build_bitglob_tx$build_bitcoin_libs$build_bitglobd$bitcoin_enable_qt$use_bench$use_tests = xnononononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
 
@@ -1582,8 +1582,8 @@ AC_SUBST(COPYRIGHT_HOLDERS_FINAL, "_COPYRIGHT_HOLDERS_FINAL")
 AC_SUBST(BITCOIN_DAEMON_NAME)
 AC_SUBST(BITCOIN_GUI_NAME)
 AC_SUBST(BITGLOB_CLI_NAME)
-AC_SUBST(BITCOIN_TX_NAME)
-AC_SUBST(BITCOIN_WALLET_TOOL_NAME)
+AC_SUBST(BITGLOB_TX_NAME)
+AC_SUBST(BITGLOB_WALLET_TOOL_NAME)
 
 AC_SUBST(RELDFLAGS)
 AC_SUBST(DEBUG_CPPFLAGS)

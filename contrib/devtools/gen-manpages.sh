@@ -9,9 +9,9 @@ MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
 BITGLOBD=${BITGLOBD:-$BINDIR/bitglobd}
 BITCOINCLI=${BITCOINCLI:-$BINDIR/bitglob-cli}
-BITCOINTX=${BITCOINTX:-$BINDIR/bitcoin-tx}
-WALLET_TOOL=${WALLET_TOOL:-$BINDIR/bitcoin-wallet}
-BITCOINQT=${BITCOINQT:-$BINDIR/qt/bitcoin-qt}
+BITCOINTX=${BITCOINTX:-$BINDIR/bitglob-tx}
+WALLET_TOOL=${WALLET_TOOL:-$BINDIR/bitglob-wallet}
+BITCOINQT=${BITCOINQT:-$BINDIR/qt/bitglob-qt}
 
 [ ! -x $BITGLOBD ] && echo "$BITGLOBD not found or not executable." && exit 1
 
@@ -20,7 +20,7 @@ read -r -a BTCVER <<< "$($BITCOINCLI --version | head -n1 | awk -F'[ -]' '{ prin
 
 # Create a footer file with copyright content.
 # This gets autodetected fine for bitglobd if --version-string is not set,
-# but has different outcomes for bitcoin-qt and bitglob-cli.
+# but has different outcomes for bitglob-qt and bitglob-cli.
 echo "[COPYRIGHT]" > footer.h2m
 $BITGLOBD --version | sed -n '1!p' >> footer.h2m
 
