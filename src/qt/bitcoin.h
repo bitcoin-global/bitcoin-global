@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_QT_BITCOIN_H
-#define BITGLOB_QT_BITCOIN_H
+#ifndef BITCOIN_QT_BITCOIN_H
+#define BITCOIN_QT_BITCOIN_H
 
 #if defined(HAVE_CONFIG_H)
 #include <config/bitcoin-config.h>
@@ -122,4 +122,4 @@ private:
 
 int GuiMain(int argc, char* argv[]);
 
-#endif // BITGLOB_QT_BITCOIN_H
+#endif // BITCOIN_QT_BITCOIN_H

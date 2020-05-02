@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_WALLET_PSBTWALLET_H
-#define BITGLOB_WALLET_PSBTWALLET_H
+#ifndef BITCOIN_WALLET_PSBTWALLET_H
+#define BITCOIN_WALLET_PSBTWALLET_H
 
 #include <node/transaction.h>
 #include <psbt.h>
@@ -32,4 +32,4 @@ NODISCARD TransactionError FillPSBT(const CWallet* pwallet,
               bool sign = true,
               bool bip32derivs = false);
 
-#endif // BITGLOB_WALLET_PSBTWALLET_H
+#endif // BITCOIN_WALLET_PSBTWALLET_H

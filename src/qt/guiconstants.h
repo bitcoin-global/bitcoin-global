@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_QT_GUICONSTANTS_H
-#define BITGLOB_QT_GUICONSTANTS_H
+#ifndef BITCOIN_QT_GUICONSTANTS_H
+#define BITCOIN_QT_GUICONSTANTS_H
 
 #include <cstdint>
 
@@ -51,4 +51,4 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 /* One gigabyte (GB) in bytes */
 static constexpr uint64_t GB_BYTES{1000000000};
 
-#endif // BITGLOB_QT_GUICONSTANTS_H
+#endif // BITCOIN_QT_GUICONSTANTS_H

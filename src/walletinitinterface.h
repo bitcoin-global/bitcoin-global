@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_WALLETINITINTERFACE_H
-#define BITGLOB_WALLETINITINTERFACE_H
+#ifndef BITCOIN_WALLETINITINTERFACE_H
+#define BITCOIN_WALLETINITINTERFACE_H
 
 struct InitInterfaces;
 
@@ -23,4 +23,4 @@ public:
 
 extern const WalletInitInterface& g_wallet_init_interface;
 
-#endif // BITGLOB_WALLETINITINTERFACE_H
+#endif // BITCOIN_WALLETINITINTERFACE_H

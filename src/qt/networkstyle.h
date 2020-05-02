@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_QT_NETWORKSTYLE_H
-#define BITGLOB_QT_NETWORKSTYLE_H
+#ifndef BITCOIN_QT_NETWORKSTYLE_H
+#define BITCOIN_QT_NETWORKSTYLE_H
 
 #include <QIcon>
 #include <QPixmap>
@@ -30,4 +30,4 @@ private:
     QString titleAddText;
 };
 
-#endif // BITGLOB_QT_NETWORKSTYLE_H
+#endif // BITCOIN_QT_NETWORKSTYLE_H

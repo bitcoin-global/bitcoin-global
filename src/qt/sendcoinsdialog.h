@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITGLOB_QT_SENDCOINSDIALOG_H
-#define BITGLOB_QT_SENDCOINSDIALOG_H
+#ifndef BITCOIN_QT_SENDCOINSDIALOG_H
+#define BITCOIN_QT_SENDCOINSDIALOG_H
 
 #include <qt/walletmodel.h>
 
@@ -121,4 +121,4 @@ private:
     int secDelay;
 };
 
-#endif // BITGLOB_QT_SENDCOINSDIALOG_H
+#endif // BITCOIN_QT_SENDCOINSDIALOG_H

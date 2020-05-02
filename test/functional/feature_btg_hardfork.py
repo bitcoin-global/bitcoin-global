@@ -6,7 +6,6 @@
 
 from test_framework.test_framework import BitcoinTestFramework
 
-from decimal import Decimal
 from test_framework.blocktools import create_coinbase, COIN
 from test_framework.messages import CBlock
 from test_framework.script import CScript, OP_NOP, OP_RETURN
