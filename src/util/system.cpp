@@ -69,7 +69,7 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "bitcoin.conf";
+const char * const BITCOIN_CONF_FILENAME = "bitglob.conf";
 
 ArgsManager gArgs;
 
@@ -1206,14 +1206,14 @@ int GetNumCores()
     return std::thread::hardware_concurrency();
 }
 
-std::string CopyrightHolders(const std::string& strPrefix)
+std::string CopyrightHolders(const std::string& strPrefix, const std::string& defaultPrefix)
 {
     const auto copyright_devs = strprintf(_(COPYRIGHT_HOLDERS).translated, COPYRIGHT_HOLDERS_SUBSTITUTION);
     std::string strCopyrightHolders = strPrefix + copyright_devs;
 
     // Make sure Bitcoin Core copyright is not removed by accident
     if (copyright_devs.find("Bitcoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
+        strCopyrightHolders += "\n" + defaultPrefix + "The Bitcoin Core developers";
     }
     return strCopyrightHolders;
 }

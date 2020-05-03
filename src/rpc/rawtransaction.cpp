@@ -981,7 +981,7 @@ UniValue decodepsbt(const JSONRPCRequest& request)
             "          \"asm\" : \"asm\",            (string) The asm\n"
             "          \"hex\" : \"hex\",            (string) The hex\n"
             "          \"type\" : \"pubkeyhash\",    (string) The type, eg 'pubkeyhash'\n"
-            "          \"address\" : \"address\"     (string) Bitcoin address if there is one\n"
+            "          \"address\" : \"address\"     (string) Bitcoin Global address if there is one\n"
             "        }\n"
             "      },\n"
             "      \"partial_signatures\" : {             (json object, optional)\n"

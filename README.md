@@ -1,4 +1,4 @@
-Bitcoin Global integration/staging tree
+Bitcoin Global
 =====================================
 
 https://bitcoin-global.io

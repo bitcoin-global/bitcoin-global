@@ -66,12 +66,12 @@
         <translation>Helbideak jasotzen</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Hauek dira zuk dirua jaso dezaketen Bitcoin helbideak. Egiaztatu beti diru-kopurua eta dirua jasoko duen helbidea zuzen egon daitezen, txanponak bidali baino lehen.</translation>
+        <source>These are your Bitcoin Global addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Hauek dira zuk dirua jaso dezaketen Bitcoin Global helbideak. Egiaztatu beti diru-kopurua eta dirua jasoko duen helbidea zuzen egon daitezen, txanponak bidali baino lehen.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Hauek dira ordainketak jasotzeko zure Bitcoin helbideak. Jaso taulako 'Jasotzeko helbide berri bat sortu' botoia erabili helbide berri bat sortzeko.</translation>
+        <source>These are your Bitcoin Global addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
+        <translation>Hauek dira ordainketak jasotzeko zure Bitcoin Global helbideak. Jaso taulako 'Jasotzeko helbide berri bat sortu' botoia erabili helbide berri bat sortzeko.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>

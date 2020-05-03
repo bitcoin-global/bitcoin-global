@@ -66,8 +66,8 @@
         <translation>Direcciones de recibo</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son tus direcciones de Bitcoin para enviar pagos. Siempre revisa el monto y la dirección de envío antes de enviar monedas.</translation>
+        <source>These are your Bitcoin Global addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son tus direcciones de Bitcoin Global para enviar pagos. Siempre revisa el monto y la dirección de envío antes de enviar monedas.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -323,7 +323,7 @@ Haga clic para habilitar la actividad de red nuevamente.</translation>
         <translation>El proxy está &lt;b&gt;habilitado&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Bitcoin Global address</source>
         <translation>Enviar monedas a una dirección Bitcoin</translation>
     </message>
     <message>
@@ -367,12 +367,12 @@ Haga clic para habilitar la actividad de red nuevamente.</translation>
         <translation>Cifre las claves privadas que pertenecen a su billetera</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Firme mensajes con sus direcciones de Bitcoin para demostrar que los posee</translation>
+        <source>Sign messages with your Bitcoin Global addresses to prove you own them</source>
+        <translation>Firme mensajes con sus direcciones de Bitcoin Global para demostrar que los posee</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verifique los mensajes para asegurarse de que se firmaron con direcciones de Bitcoin especificadas.</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Global addresses</source>
+        <translation>Verifique los mensajes para asegurarse de que se firmaron con direcciones de Bitcoin Global especificadas.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -615,7 +615,7 @@ Solicitar pagos (genera códigos QR y bitglobal: URI)
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Global network.</source>
         <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de Bitcoin.</translation>
     </message>
     <message>

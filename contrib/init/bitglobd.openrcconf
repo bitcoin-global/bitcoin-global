@@ -1,7 +1,7 @@
 # /etc/conf.d/bitglobd: config file for /etc/init.d/bitglobd
 
 # Config file location
-#BITGLOBD_CONFIGFILE="/etc/bitcoin/bitcoin.conf"
+#BITGLOBD_CONFIGFILE="/etc/bitglob/bitglob.conf"
 
 # What directory to write pidfile to?  (created and owned by $BITGLOBD_USER)
 #BITGLOBD_PIDDIR="/var/run/bitglobd"

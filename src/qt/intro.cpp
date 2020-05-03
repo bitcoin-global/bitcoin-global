@@ -243,7 +243,7 @@ bool Intro::showIfNeeded(interfaces::Node& node, bool& did_show_intro, bool& pru
         settings.setValue("fReset", false);
     }
     /* Only override -datadir if different from the default, to make it possible to
-     * override -datadir in the bitcoin.conf file in the default data directory
+     * override -datadir in the bitglob.conf file in the default data directory
      * (to be consistent with bitglobd behavior)
      */
     if(dataDir != GUIUtil::getDefaultDataDirectory()) {

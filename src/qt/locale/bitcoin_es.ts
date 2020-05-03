@@ -66,12 +66,12 @@
         <translation>Direcciones de recepción</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son sus direcciones Bitcoin para enviar pagos. Compruebe siempre la cantidad y la dirección de recibo antes de transferir monedas.</translation>
+        <source>These are your Bitcoin Global addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son sus direcciones Bitcoin Global para enviar pagos. Compruebe siempre la cantidad y la dirección de recibo antes de transferir monedas.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Estas son sus direcciones Bitcoin para la recepción de pagos. Use el botón 'Crear una nueva dirección para recepción' en la pestaña Recibir para crear nuevas direcciones</translation>
+        <source>These are your Bitcoin Global addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
+        <translation>Estas son sus direcciones Bitcoin Global para la recepción de pagos. Use el botón 'Crear una nueva dirección para recepción' en la pestaña Recibir para crear nuevas direcciones</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -362,7 +362,7 @@
         <translation>El proxy está &lt;b&gt;habilitado&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Bitcoin Global address</source>
         <translation>Enviar monedas a una dirección Bitcoin</translation>
     </message>
     <message>
@@ -406,12 +406,12 @@
         <translation>Cifrar las claves privadas de su monedero</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Firmar mensajes con sus direcciones Bitcoin para demostrar la propiedad</translation>
+        <source>Sign messages with your Bitcoin Global addresses to prove you own them</source>
+        <translation>Firmar mensajes con sus direcciones Bitcoin Global para demostrar la propiedad</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verificar mensajes comprobando que están firmados con direcciones Bitcoin concretas</translation>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Global addresses</source>
+        <translation>Verificar mensajes comprobando que están firmados con direcciones Bitcoin Global concretas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -450,7 +450,7 @@
         <translation>&amp;Opciones de línea de comandos</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
+        <source>%n active connection(s) to Bitcoin Global network</source>
         <translation><numerusform>%n conexión activa hacia la red Bitcoin</numerusform><numerusform>%n conexiones activas hacia la red Bitcoin</numerusform></translation>
     </message>
     <message>
@@ -518,7 +518,7 @@
         <translation>Cerrar monedero</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible Bitcoin Global command-line options</source>
         <translation>Muestre el mensaje de ayuda %1 para obtener una lista con posibles opciones de línea de comandos de Bitcoin</translation>
     </message>
     <message>
@@ -630,8 +630,8 @@
         <translation>El monedero está &lt;b&gt;cifrado&lt;/b&gt; y actualmente &lt;b&gt;bloqueado&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Se produjo un error fatal. Bitcoin ya no puede continuar de manera segura y se cerrará</translation>
+        <source>A fatal error occurred. Bitcoin Global can no longer continue safely and will quit.</source>
+        <translation>Se produjo un error fatal. Bitcoin Global ya no puede continuar de manera segura y se cerrará</translation>
     </message>
 </context>
 <context>
@@ -874,7 +874,7 @@
         <translation>Editar dirección de envío</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
+        <source>The entered address "%1" is not a valid Bitcoin Global address.</source>
         <translation>La dirección ingresada "%1" no es una dirección válida de Bitcoin.</translation>
     </message>
     <message>
@@ -991,7 +991,7 @@
         <translation>Aproximadamente %1 GB de datos se almacenarán en este directorio.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
+        <source>%1 will download and store a copy of the Bitcoin Global block chain.</source>
         <translation>%1 descargará y almacenará una copia de la cadena de bloques de Bitcoin.</translation>
     </message>
     <message>
@@ -1223,8 +1223,8 @@
         <translation>&amp; Gastar cambio no confirmado</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente el puerto del cliente Bitcoin en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
+        <source>Automatically open the Bitcoin Global client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto del cliente Bitcoin Global en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1239,8 +1239,8 @@
         <translation>Permitir conexiones entrantes</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Conéctese a la red de Bitcoin a través de un proxy SOCKS5.</translation>
+        <source>Connect to the Bitcoin Global network through a SOCKS5 proxy.</source>
+        <translation>Conéctese a la red de Bitcoin Global a través de un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1275,8 +1275,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Conéctese a la red de Bitcoin a través de un proxy SOCKS5 separado para los servicios Tor ocultos.</translation>
+        <source>Connect to the Bitcoin Global network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Conéctese a la red de Bitcoin Global a través de un proxy SOCKS5 separado para los servicios Tor ocultos.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1386,8 +1386,8 @@
         <translation>Desde</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red Bitcoin después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Global network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red Bitcoin Global después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1497,8 +1497,8 @@
         <translation>Dirección de pago inválida %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>¡No se puede interpretar la URI! Esto puede deberse a una dirección Bitcoin inválida o a parámetros de URI mal formados.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin Global address or malformed URI parameters.</source>
+        <translation>¡No se puede interpretar la URI! Esto puede deberse a una dirección Bitcoin Global inválida o a parámetros de URI mal formados.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1599,8 +1599,8 @@
         <translation>Cantidad</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Ingrese una dirección de Bitcoin (por ejemplo, %1)</translation>
+        <source>Enter a Bitcoin Global address (e.g. %1)</source>
+        <translation>Ingrese una dirección de Bitcoin Global (por ejemplo, %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2060,7 +2060,7 @@
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Global network.</source>
         <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud esté abierta. Nota: El mensaje no se enviará con el pago a través de la red de Bitcoin.</translation>
     </message>
     <message>
@@ -2334,7 +2334,7 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Cuando hay menos volumen de transacciones que espacio en los bloques, los mineros y los nodos de retransmisión pueden imponer una comisión mínima. Pagar solo esta comisión mínima está bien, pero tenga en cuenta que esto puede resultar en una transacción nunca confirmada una vez que haya más demanda de transacciones de Bitcoin de la que la red puede procesar.</translation>
+        <translation>Cuando hay menos volumen de transacciones que espacio en los bloques, los mineros y los nodos de retransmisión pueden imponer una comisión mínima. Pagar solo esta comisión mínima está bien, pero tenga en cuenta que esto puede resultar en una transacción nunca confirmada una vez que haya más demanda de transacciones de Bitcoin Global de la que la red puede procesar.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2489,8 +2489,8 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation><numerusform>Estimado para empezar la confirmación dentro de %n bloque.</numerusform><numerusform>Estimado para empezar la confirmación dentro de %n bloques.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Peligro: Dirección de Bitcoin inválida</translation>
+        <source>Warning: Invalid Bitcoin Global address</source>
+        <translation>Peligro: Dirección de Bitcoin Global inválida</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2532,8 +2532,8 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation>Esto es un pago ordinario.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation>Dirección Bitcoin a la que se enviará el pago</translation>
+        <source>The Bitcoin Global address to send the payment to</source>
+        <translation>Dirección Bitcoin Global a la que se enviará el pago</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2580,7 +2580,7 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation>Introduzca una etiqueta para esta dirección para añadirla a la lista de direcciones utilizadas</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Global network.</source>
         <translation>Un mensaje que se adjuntó a la bitglobal: URL que será almacenada con la transacción para su referencia. Nota: Este mensaje no se envía a través de la red Bitcoin.</translation>
     </message>
     <message>
@@ -2629,8 +2629,8 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation>Puede firmar los mensajes con sus direcciones para demostrar que las posee. Tenga cuidado de no firmar cualquier cosa de manera vaga o aleatoria, pues los ataques de phishing pueden tratar de engañarle firmando su identidad a través de ellos. Sólo firme declaraciones totalmente detalladas con las que usted esté de acuerdo.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Dirección Bitcoin con la que firmar el mensaje</translation>
+        <source>The Bitcoin Global address to sign the message with</source>
+        <translation>Dirección Bitcoin Global con la que firmar el mensaje</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2661,7 +2661,7 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Bitcoin Global address</source>
         <translation>Firmar el mensaje para demostrar que se posee esta dirección Bitcoin</translation>
     </message>
     <message>
@@ -2685,12 +2685,12 @@ Nota: Dado que la comisión se calcula por byte, una comisión de "100 satoshis 
         <translation>Introduzca la dirección para la firma, el mensaje (asegurándose de copiar tal cual los saltos de línea, espacios, tabulaciones, etc.) y la firma a continuación para verificar el mensaje. Tenga cuidado de no asumir más información de lo que dice el propio mensaje firmado para evitar fraudes basados en ataques de tipo man-in-the-middle.</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>La dirección Bitcoin con la que se firmó el mensaje</translation>
+        <source>The Bitcoin Global address the message was signed with</source>
+        <translation>La dirección Bitcoin Global con la que se firmó el mensaje</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección Bitcoin indicada</translation>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Global address</source>
+        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección Bitcoin Global indicada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>

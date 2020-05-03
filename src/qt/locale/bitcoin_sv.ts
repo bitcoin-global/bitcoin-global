@@ -66,11 +66,11 @@
         <translation>Mottagaradresser</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Bitcoin Global addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Detta är dina Bitcoin-adresser för att skicka betalningar. Kontrollera alltid belopp och mottagaradress innan du skickar bitcoin.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
+        <source>These are your Bitcoin Global addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
         <translation>Detta är dina Bitcoinadresser för att ta emot betalningar. Använd knappen 'Skapa ny mottagaradress' på fliken ta emot för att skapa nya adresser .</translation>
     </message>
     <message>
@@ -363,7 +363,7 @@ Försök igen.</translation>
         <translation>Proxy är &lt;b&gt; aktiverad &lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Bitcoin Global address</source>
         <translation>Skicka bitcoin till en Bitcoin-adress</translation>
     </message>
     <message>
@@ -407,11 +407,11 @@ Försök igen.</translation>
         <translation>Kryptera de privata nycklar som tillhör din plånbok</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
+        <source>Sign messages with your Bitcoin Global addresses to prove you own them</source>
         <translation>Signera meddelanden med dina Bitcoin-adresser för att bevisa att du äger dem</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified Bitcoin Global addresses</source>
         <translation>Verifiera meddelanden för att vara säker på att de signerades med angivna Bitcoin-adresser</translation>
     </message>
     <message>
@@ -451,7 +451,7 @@ Försök igen.</translation>
         <translation>&amp;Kommandoradsalternativ</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
+        <source>%n active connection(s) to Bitcoin Global network</source>
         <translation><numerusform>%n aktiva anslutningar till Bitcoin-nätverket.</numerusform><numerusform>%n aktiva anslutningar till Bitcoin-nätverket.</numerusform></translation>
     </message>
     <message>
@@ -519,8 +519,8 @@ Försök igen.</translation>
         <translation>Stäng plånboken</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga Bitcoin kommandoradsalternativ.</translation>
+        <source>Show the %1 help message to get a list with possible Bitcoin Global command-line options</source>
+        <translation>Visa %1 hjälpmeddelande för att få en lista med möjliga Bitcoin Global kommandoradsalternativ.</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -631,8 +631,8 @@ Försök igen.</translation>
         <translation>Denna plånbok är &lt;b&gt;krypterad&lt;/b&gt; och för närvarande &lt;b&gt;låst&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Ett kritiskt fel uppstod. Bitcoin kan inte fortsätta att köra säkert och kommer att avslutas.</translation>
+        <source>A fatal error occurred. Bitcoin Global can no longer continue safely and will quit.</source>
+        <translation>Ett kritiskt fel uppstod. Bitcoin Global kan inte fortsätta att köra säkert och kommer att avslutas.</translation>
     </message>
 </context>
 <context>
@@ -855,7 +855,7 @@ Försök igen.</translation>
         <translation>Redigera avsändaradress</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
+        <source>The entered address "%1" is not a valid Bitcoin Global address.</source>
         <translation>Den angivna adressen "%1" är inte en giltig Bitcoin-adress.</translation>
     </message>
     <message>
@@ -964,7 +964,7 @@ Försök igen.</translation>
         <translation>Ungefär %1 GB data kommer att lagras i den här katalogen.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
+        <source>%1 will download and store a copy of the Bitcoin Global block chain.</source>
         <translation>%1 kommer att ladda ner och lagra en kopia av Bitcoins blockkedja.</translation>
     </message>
     <message>
@@ -1200,7 +1200,7 @@ Försök igen.</translation>
         <translation>&amp;Spendera obekräftad växel</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Bitcoin Global client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Öppna automatiskt Bitcoin-klientens port på routern. Detta fungerar endast om din router stödjer UPnP och det är är aktiverat.</translation>
     </message>
     <message>
@@ -1216,7 +1216,7 @@ Försök igen.</translation>
         <translation>Tillåt inkommande anslutningar</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the Bitcoin Global network through a SOCKS5 proxy.</source>
         <translation>Anslut till Bitcoin-nätverket genom en SOCKS5-proxy.</translation>
     </message>
     <message>
@@ -1252,7 +1252,7 @@ Försök igen.</translation>
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <source>Connect to the Bitcoin Global network through a separate SOCKS5 proxy for Tor hidden services.</source>
         <translation>Anslut till Bitcoin-nätverket genom en separat SOCKS5-proxy för dolda tjänster i Tor.</translation>
     </message>
     <message>
@@ -1363,7 +1363,7 @@ Försök igen.</translation>
         <translation>Formulär</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin Global network after a connection is established, but this process has not completed yet.</source>
         <translation>Den visade informationen kan vara inaktuell. Plånboken synkroniseras automatiskt med Bitcoin-nätverket efter att anslutningen är upprättad, men denna process har inte slutförts ännu.</translation>
     </message>
     <message>
@@ -1466,7 +1466,7 @@ Försök igen.</translation>
         <translation>Ogiltig betalningsadress %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin Global address or malformed URI parameters.</source>
         <translation>URI kan inte parsas! Detta kan orsakas av en ogiltig Bitcoin-adress eller felaktiga URI-parametrar.</translation>
     </message>
     <message>
@@ -1568,7 +1568,7 @@ Försök igen.</translation>
         <translation>Belopp</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
+        <source>Enter a Bitcoin Global address (e.g. %1)</source>
         <translation>Ange en Bitcoin-adress (t.ex. %1)</translation>
     </message>
     <message>
@@ -2025,7 +2025,7 @@ Försök igen.</translation>
         <translation>&amp;Meddelande:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin Global network.</source>
         <translation>Ett valfritt meddelande att bifoga betalningsbegäran, vilket visas när begäran öppnas. Obs: Meddelandet kommer inte att sändas med betalningen över Bitcoin-nätverket.</translation>
     </message>
     <message>
@@ -2446,7 +2446,7 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation><numerusform>Uppskattas till att påbörja bekräftelse inom %n block.</numerusform><numerusform>Uppskattas till att påbörja bekräftelse inom %n block.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
+        <source>Warning: Invalid Bitcoin Global address</source>
         <translation>Varning: Ogiltig Bitcoin-adress</translation>
     </message>
     <message>
@@ -2489,7 +2489,7 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation>Detta är en normal betalning.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
+        <source>The Bitcoin Global address to send the payment to</source>
         <translation>Bitcoin-adress att sända betalning till</translation>
     </message>
     <message>
@@ -2537,7 +2537,7 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation>Ange en etikett för denna adress för att lägga till den i listan med använda adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the bitglobal: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin Global network.</source>
         <translation>Ett meddelande som bifogades bitglobal: -URIn och som sparas med transaktionen som referens. Obs: Meddelandet sänds inte över Bitcoin-nätverket.</translation>
     </message>
     <message>
@@ -2586,7 +2586,7 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation>Du kan signera meddelanden/avtal med dina adresser för att bevisa att du kan ta emot bitcoin som skickats till dem. Var försiktig så du inte signerar något oklart eller konstigt, eftersom phishing-angrepp kan försöka få dig att signera över din identitet till dem. Signera endast väldetaljerade meddelanden som du godkänner.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
+        <source>The Bitcoin Global address to sign the message with</source>
         <translation>Bitcoin-adress att signera meddelandet med</translation>
     </message>
     <message>
@@ -2618,7 +2618,7 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation>Kopiera signaturen till systemets Urklipp</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Bitcoin Global address</source>
         <translation>Signera meddelandet för att bevisa att du äger denna Bitcoin-adress</translation>
     </message>
     <message>
@@ -2642,11 +2642,11 @@ Notera: Då avgiften beräknas per byte kommer en avgift på 50 satoshi tas ut f
         <translation>Ange mottagarens adress, meddelande (kopiera radbrytningar, mellanslag, TAB-tecken, osv. exakt) och signatur nedan, för att verifiera meddelandet. Undvik att läsa in mera information i signaturen än vad som stod i själva det signerade meddelandet, för att undvika ett man-in-the-middle-angrepp. Notera att detta endast bevisar att den signerande parten tar emot med adressen, det bevisar inte vem som skickat transaktionen!</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
+        <source>The Bitcoin Global address the message was signed with</source>
         <translation>Bitcoin-adress som meddelandet signerades med</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Bitcoin Global address</source>
         <translation>Verifiera meddelandet för att vara säker på att det signerades med angiven Bitcoin-adress</translation>
     </message>
     <message>
