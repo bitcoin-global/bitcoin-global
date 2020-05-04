@@ -28,7 +28,7 @@ def setup():
         subprocess.check_call(['git', 'clone', 'https://github.com/bitcoin-global/bitcoin-detached-sigs.git'])
     if not os.path.isdir('gitian-builder'):
         subprocess.check_call(['git', 'clone', 'https://github.com/devrandom/gitian-builder.git'])
-    if not os.path.isdir('bitcoin'):
+    if not os.path.isdir('bitcoin-global'):
         subprocess.check_call(['git', 'clone', 'https://github.com/bitcoin-global/bitcoin-global.git'])
     os.chdir('gitian-builder')
     make_image_prog = ['bin/make-base-vm', '--suite', 'bionic', '--arch', 'amd64']
@@ -229,7 +229,7 @@ def main():
         raise Exception('Cannot have both commit and pull')
     args.commit = ('' if args.commit else 'v') + args.version
 
-    os.chdir('bitcoin')
+    os.chdir('bitcoin-global')
     if args.pull:
         subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
         os.chdir('../gitian-builder/inputs/bitcoin')
