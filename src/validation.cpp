@@ -2209,8 +2209,8 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
     // BTG Hard Fork premine block reward
-    if (IsBTGPremineActive(nHeight, consensusParams))
-        blockReward = nFees + consensusParams.BTGPremineReward * COIN;
+    if (IsBTGPremineActive(pindex->nHeight, chainparams.GetConsensus()))
+        blockReward = nFees + chainparams.GetConsensus().BTGPremineReward * COIN;
 
     if (block.vtx[0]->GetValueOut() > blockReward)
         return state.Invalid(ValidationInvalidReason::CONSENSUS,
