@@ -345,13 +345,6 @@ bool static IsBTGHardForkEnabled(int nHeight, const Consensus::Params& params) {
     return nHeight >= params.BTGHeight;
 }
 
-/* Verifying if the Bitcoin Global premine period is currently active. */
-bool static IsBTGPremineActive(int nHeight, const Consensus::Params& params) {
-    return (nHeight >= params.BTGHeight &&
-        nHeight < params.BTGHeight + params.BTGPremineWindow &&
-        params.BTGPremineEnforceWhitelist);
-}
-
 bool IsBTGHardForkEnabled(const CBlockIndex* pindexPrev, const Consensus::Params& params) {
     if (pindexPrev == nullptr) {
         return false;
@@ -363,6 +356,13 @@ bool IsBTGHardForkEnabled(const CBlockIndex* pindexPrev, const Consensus::Params
 bool IsBTGHardForkEnabledForCurrentBlock(const Consensus::Params& params) {
     AssertLockHeld(cs_main);
     return IsBTGHardForkEnabled(::ChainActive().Tip(), params);
+}
+
+/* Verifying if the Bitcoin Global premine period is currently active. */
+bool IsBTGPremineActive(int nHeight, const Consensus::Params& params) {
+    return (nHeight >= params.BTGHeight &&
+        nHeight < params.BTGHeight + params.BTGPremineWindow &&
+        params.BTGPremineEnforceWhitelist);
 }
 
 /* Make mempool consistent after a reorg, by re-adding or recursively erasing
@@ -1270,12 +1270,6 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     CAmount nSubsidy = 50 * COIN;
     // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
-
-    // During BTG Hard Fork premine period, Block Reward is increased
-    // as it will not be mined on standard blocks.
-    if (IsBTGPremineActive(nHeight, consensusParams))
-        return consensusParams.BTGPremineReward * COIN;
-
     return nSubsidy;
 }
 
@@ -2214,6 +2208,10 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
+    // BTG Hard Fork premine block reward
+    if (IsBTGPremineActive(nHeight, consensusParams))
+        blockReward = nFees + consensusParams.BTGPremineReward * COIN;
+
     if (block.vtx[0]->GetValueOut() > blockReward)
         return state.Invalid(ValidationInvalidReason::CONSENSUS,
                          error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",

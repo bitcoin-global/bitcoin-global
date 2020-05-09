@@ -804,5 +804,6 @@ inline bool IsBlockPruned(const CBlockIndex* pblockindex)
 }
 
 bool IsBTGHardForkEnabledForCurrentBlock(const Consensus::Params& params);
+bool IsBTGPremineActive(int nHeight, const Consensus::Params& params);
 
 #endif // BITCOIN_VALIDATION_H
