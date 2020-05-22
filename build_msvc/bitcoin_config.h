@@ -8,7 +8,7 @@
 #define CLIENT_VERSION_BUILD 0
 
 /* Version is release */
-#define CLIENT_VERSION_IS_RELEASE true
+#define CLIENT_VERSION_IS_RELEASE false
 
 /* Major version */
 #define CLIENT_VERSION_MAJOR 0
@@ -17,7 +17,7 @@
 #define CLIENT_VERSION_MINOR 19
 
 /* Build revision */
-#define CLIENT_VERSION_REVISION 1
+#define CLIENT_VERSION_REVISION 2
 
 /* Copyright holder(s) before %s replacement */
 #define COPYRIGHT_HOLDERS "The %s developers"
@@ -346,7 +346,7 @@
 #define PACKAGE_NAME "Bitcoin Global"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Bitcoin Global 0.19.0"
+#define PACKAGE_STRING "Bitcoin Global 0.19.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "bitglobal"
@@ -355,7 +355,7 @@
 #define PACKAGE_URL "https://bitcoin-global.io/"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.19.0"
+#define PACKAGE_VERSION "0.19.2"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
