@@ -119,16 +119,16 @@ make -C depends --jobs="$MAX_JOBS" HOST="$HOST" \
 ###########################
 
 # Create the source tarball and move it to "${OUTDIR}/src" if not already there
-if [ -z "$(find "${OUTDIR}/src" -name 'bitcoin-*.tar.gz')" ]; then
+if [ -z "$(find "${OUTDIR}/src" -name 'bitcoin-global-*.tar.gz')" ]; then
     ./autogen.sh
     env CONFIG_SITE="${BASEPREFIX}/${HOST}/share/config.site" ./configure --prefix=/
     make dist GZIP_ENV='-9n' ${V:+V=1}
     mkdir -p "${OUTDIR}/src"
-    mv "$(find "${PWD}" -name 'bitcoin-*.tar.gz')" "${OUTDIR}/src/"
+    mv "$(find "${PWD}" -name 'bitcoin-global-*.tar.gz')" "${OUTDIR}/src/"
 fi
 
 # Determine the full path to our source tarball
-SOURCEDIST="$(find "${OUTDIR}/src" -name 'bitcoin-*.tar.gz')"
+SOURCEDIST="$(find "${OUTDIR}/src" -name 'bitcoin-global-*.tar.gz')"
 # Determine our distribution name (e.g. bitcoin-0.18.0)
 DISTNAME="$(basename "$SOURCEDIST" '.tar.gz')"
 
