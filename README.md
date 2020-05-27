@@ -1,26 +1,68 @@
-Bitcoin Global
-=====================================
+<p align="center"><img src="https://i.ibb.co/n0xQ1RY/logo-transparent.png" height="300"></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/slack-%40bitcoin--global-yellow?style=flat-square&logo=slack" alt="Slack">
+  <img src="https://img.shields.io/badge/twitter-%40bitcoin--global-blue?style=flat-square&logo=twitter" alt="Twitter">
+  <br>
+  <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/bitcoin-global/bitcoin-global?sort=semver">
+   <a href="https://travis-ci.com/github/bitcoin-global/bitcoin-global/builds" target="_blank">
+     <img src="https://travis-ci.com/bitcoin-global/bitcoin-global.svg?token=Kiztszp4vesa1iqMmSZ1&branch=master">
+   </a>
+   <a href="https://app.circleci.com/pipelines/github/bitcoin-global/bitcoin-global" target="_blank">
+      <img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/bitcoin-global/bitcoin-global/master?label=release">
+   </a>
+  <img src="https://img.shields.io/badge/status-stable-green.svg">
+  <a href="https://github.com/bitcoin-global/bitcoin-global/releases">
+    <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/bitcoin-global/bitcoin-global/total">
+  </a>
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bitcoin-global/bitcoin-global"><br>
+</p>
 
-https://bitcoin-global.io
 
-What is Bitcoin?
+
+What is Bitcoin Global?
 ----------------
 
-Bitcoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Bitcoin Core is the name of open source
-software which enables the use of this currency.
+Bitcoin Global is an experimental digital currency extending the original Bitcoin implementation, which enables instant payments to anyone, anywhere in the world. Bitcoin Global uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. 
+
+By introducing smaller blocks of 400KB, Bitcoin Global implements a sustainable economic model for all chain participants, ensuring at the same time that decentralization and profitability are maintained. Most importantly, smaller blocks translate to a higher total number of nodes due to lesser computational power requirements and more nodes on the other side ensure an increased degree of decentralization.
 
 For more information, as well as an immediately useable, binary version of
-the Bitcoin Global software, see https://bitcoin-global.io/en/download/, or read the
-[original whitepaper](https://bitcoin-global.io/bitcoin.pdf).
+the Bitcoin Global software, see https://bitcoin-global.io/en/download/ or read the
+[original whitepaper](https://bitcoin-global.io/whitepaper.pdf).
+
+Specifications
+-------
+Specification         | Value
+---                   | ---
+Supply                | 21.1 Million
+Premine               | 0.1 Million
+PoW algorithm         | SHA256
+Mining hardware       | ASIC              
+Block interval        | 10 Minutes
+Block size            | 0.4 MB
+Difficulty adjustment | 2 weeks
+SegWit                | :heavy_check_mark:
+Replay protection     | :heavy_check_mark:
+
+## Resources
+
+* [Blockchain Explorer](https://blockchain.bitcoin-global.io/)
+* [White Paper](https://bitcoin-global.io/whitepaper.pdf)
+
+### Community
+
+* [Telegram](https://t.me/bitcoin-global)
+* [Discord](https://discord.gg/bitcoin-global)
+* [Twitter](https://www.twitter.com/bitcoin-global)
+* [Facebook](https://www.facebook.com/bitcoin-global/)
+* [Reddit](https://www.reddit.com/r/bitcoin-global/)
+
 
 License
 -------
 
 Bitcoin Global is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/licenses/MIT.
+information.
 
 Development Process
 -------------------
@@ -51,25 +93,5 @@ There are also [regression and integration tests](/test), written
 in Python, that are run automatically on the build server.
 These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
 
-The Travis CI system makes sure that every pull request is built for Windows, Linux, and macOS, and that unit/sanity tests are run automatically.
+Travis CI and Circle CI systems make sure that every change is built, tested and released for Windows, Linux, and macOS, and that unit/sanity tests are run automatically.
 
-### Manual Quality Assurance (QA) Testing
-
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
-
-Translations
-------------
-
-Changes to translations as well as new translations can be submitted to
-[Bitcoin Core's Transifex page](https://www.transifex.com/bitcoin/bitcoin/).
-
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
-
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
-
-Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/bitcoin-translators).
