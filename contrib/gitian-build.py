@@ -212,7 +212,7 @@ def main():
         print('Cannot build for MacOS, SDK does not exist. Will build for other OSes')
         args.macos = False
 
-    args.sign_prog = 'true' if args.detach_sign else 'gpg --no-tty --detach-sign'
+    args.sign_prog = 'true' if args.detach_sign else 'gpg2 --yes --no-tty --detach-sign'
 
     script_name = os.path.basename(sys.argv[0])
     if not args.signer:
