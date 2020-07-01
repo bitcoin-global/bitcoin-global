@@ -30,5 +30,5 @@ fls "${HFSFILENAME}" -rpF ${SDKDIRINODE} |
 done
 echo "Building ${SDKNAME}.tar.gz ..."
 MTIME="$(istat "${HFSFILENAME}" "${SDKDIRINODE}" | perl -nle 'm/Content Modified:\s+(.*?)\s\(/ && print $1')"
-find "${SDKNAME}" | sort | tar --no-recursion --mtime="${MTIME}" --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | gzip -9n > "${SDKNAME}.tar.gz"
+find "${SDKNAME}" | sort | tar --no-recursion --mtime="${MTIME}" --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 -c -T - | pigz -9n > "${SDKNAME}.tar.gz"
 echo 'All done!'
