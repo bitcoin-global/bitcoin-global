@@ -32,6 +32,7 @@ packages:
 - "bsdmainutils"
 - "ca-certificates"
 - "python3"
+- "pigz"
 remotes:
 - "url": "https://github.com/bitcoin-global/bitcoin-global.git"
   "dir": "bitcoin-global"

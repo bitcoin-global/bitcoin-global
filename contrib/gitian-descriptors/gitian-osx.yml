@@ -28,6 +28,7 @@ packages:
 - "python3-dev"
 - "python3-setuptools"
 - "fonts-tuffy"
+- "pigz"
 remotes:
 - "url": "https://github.com/bitcoin-global/bitcoin-global.git"
   "dir": "bitcoin-global"

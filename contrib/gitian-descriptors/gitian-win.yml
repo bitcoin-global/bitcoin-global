@@ -23,6 +23,7 @@ packages:
 - "ca-certificates"
 - "python3"
 - "rename"
+- "pigz"
 remotes:
 - "url": "https://github.com/bitcoin-global/bitcoin-global.git"
   "dir": "bitcoin-global"
