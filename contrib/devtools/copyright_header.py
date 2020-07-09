@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# Copyright (c) 2016-2018 The Bitcoin Core developers
+# Copyright (c) 2016-2019 The Bitcoin Core developers
+# Copyright (c) 2020 The Bitcoin Global developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -90,6 +91,7 @@ def compile_copyright_regex(copyright_style, year_style, name):
 EXPECTED_HOLDER_NAMES = [
     r"Satoshi Nakamoto",
     r"The Bitcoin Core developers",
+    r"The Bitcoin Global developers",
     r"BitPay Inc\.",
     r"University of Illinois at Urbana-Champaign\.",
     r"Pieter Wuille",
@@ -351,7 +353,7 @@ def parse_year_range(year_range):
     return start_year, year_split[1]
 
 def year_range_to_str(start_year, end_year):
-    if start_year == end_year:
+    if str(start_year) >= str(end_year):
         return start_year
     return "%s-%s" % (start_year, end_year)
 
@@ -366,11 +368,13 @@ def create_updated_copyright_line(line, last_git_change_year):
     space_split = after_copyright.split(' ')
     year_range = space_split[0]
     start_year, end_year = parse_year_range(year_range)
-    if end_year == last_git_change_year:
-        return line
+    # if end_year == last_git_change_year:
+    #    return line
     return (before_copyright + copyright_splitter +
             year_range_to_str(start_year, last_git_change_year) + ' ' +
-            ' '.join(space_split[1:]))
+            ' '.join(space_split[1:]) + before_copyright +
+            "Copyright (c) %s The Bitcoin Global developers" % year_range_to_str(2020, last_git_change_year) +
+            '\n')
 
 def update_updatable_copyright(filename):
     file_lines = read_file_lines(filename)
@@ -444,10 +448,12 @@ def update_cmd(argv):
 def get_header_lines(header, start_year, end_year):
     lines = header.split('\n')[1:-1]
     lines[0] = lines[0] % year_range_to_str(start_year, end_year)
+    lines[1] = lines[1] % year_range_to_str(2020, end_year)
     return [line + '\n' for line in lines]
 
 CPP_HEADER = '''
 // Copyright (c) %s The Bitcoin Core developers
+// Copyright (c) %s The Bitcoin Global developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
@@ -457,6 +463,7 @@ def get_cpp_header_lines_to_insert(start_year, end_year):
 
 PYTHON_HEADER = '''
 # Copyright (c) %s The Bitcoin Core developers
+# Copyright (c) %s The Bitcoin Global developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 '''
