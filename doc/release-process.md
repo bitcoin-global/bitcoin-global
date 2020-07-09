@@ -61,8 +61,8 @@ If you're using the automated script (found in [contrib/gitian-build.py](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/bitcoin-global/gitian.sigs.git
-    git clone https://github.com/bitcoin-global/bitcoin-detached-sigs.git
+    git clone https://github.com/bitcoin-global/global.gitian.sigs.git
+    git clone https://github.com/bitcoin-global/global.detached.sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     git clone https://github.com/bitcoin-global/bitcoin-global.git
 
@@ -100,9 +100,9 @@ Setup Gitian descriptors:
     git checkout v${VERSION}
     popd
 
-Ensure your gitian.sigs are up-to-date if you wish to gverify your builds against other Gitian signatures.
+Ensure your global.gitian.sigs are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./gitian.sigs
+    pushd ./global.gitian.sigs
     git pull
     popd
 
@@ -148,16 +148,16 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
     pushd ./gitian-builder
     ./bin/gbuild --num-make 2 --memory 3000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../global.gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
     mv build/out/bitcoin-*.tar.gz build/out/src/bitcoin-*.tar.gz ../
 
     ./bin/gbuild --num-make 2 --memory 3000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../global.gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
     mv build/out/bitcoin-*-win-unsigned.tar.gz inputs/bitcoin-win-unsigned.tar.gz
     mv build/out/bitcoin-*.zip build/out/bitcoin-*.exe ../
 
     ./bin/gbuild --num-make 2 --memory 3000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../global.gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
     mv build/out/bitcoin-*-osx-unsigned.tar.gz inputs/bitcoin-osx-unsigned.tar.gz
     mv build/out/bitcoin-*.tar.gz build/out/bitcoin-*.dmg ../
     popd
@@ -168,7 +168,7 @@ Build output expected:
   2. linux 32-bit and 64-bit dist tarballs (`bitcoin-${VERSION}-linux[32|64].tar.gz`)
   3. windows 32-bit and 64-bit unsigned installers and dist zips (`bitcoin-${VERSION}-win[32|64]-setup-unsigned.exe`, `bitcoin-${VERSION}-win[32|64].zip`)
   4. macOS unsigned installer and dist tarball (`bitcoin-${VERSION}-osx-unsigned.dmg`, `bitcoin-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  5. Gitian signatures (in `global.gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
@@ -177,21 +177,21 @@ Add other gitian builders keys to your gpg keyring, and/or refresh keys: See `..
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../global.gitian.sigs/ -r ${VERSION}-linux ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../global.gitian.sigs/ -r ${VERSION}-win-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../global.gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
-Commit your signature to gitian.sigs:
+Commit your signature to global.gitian.sigs:
 
-    pushd gitian.sigs
+    pushd global.gitian.sigs
     git add ${VERSION}-linux/"${SIGNER}"
     git add ${VERSION}-win-unsigned/"${SIGNER}"
     git add ${VERSION}-osx-unsigned/"${SIGNER}"
     git commit -m "Add ${VERSION} unsigned sigs for ${SIGNER}"
-    git push  # Assuming you can push to the gitian.sigs tree
+    git push  # Assuming you can push to the global.gitian.sigs tree
     popd
 
 Codesigner only: Create Windows/macOS detached signatures:
@@ -215,7 +215,7 @@ Codesigner only: Sign the windows binaries:
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/bitcoin-detached-sigs
+    cd ~/global.detached.sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -228,14 +228,14 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/macOS detached signatures:
 
 - Once the Windows/macOS builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [bitcoin-detached-sigs](https://github.com/bitcoin-global/bitcoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [global.detached.sigs](https://github.com/bitcoin-global/global.detached.sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed macOS binary:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../global.gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../global.gitian.sigs/ -r ${VERSION}-osx-signed ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     mv build/out/bitcoin-osx-signed.dmg ../bitcoin-${VERSION}-osx.dmg
     popd
 
@@ -243,18 +243,18 @@ Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../global.gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../global.gitian.sigs/ -r ${VERSION}-win-signed ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/bitcoin-*win64-setup.exe ../bitcoin-${VERSION}-win64-setup.exe
     popd
 
 Commit your signature for the signed macOS/Windows binaries:
 
-    pushd gitian.sigs
+    pushd global.gitian.sigs
     git add ${VERSION}-osx-signed/"${SIGNER}"
     git add ${VERSION}-win-signed/"${SIGNER}"
     git commit -m "Add ${SIGNER} ${VERSION} signed binaries signatures"
-    git push  # Assuming you can push to the gitian.sigs tree
+    git push  # Assuming you can push to the global.gitian.sigs tree
     popd
 
 ### After 3 or more people have gitian-built and their results match:
