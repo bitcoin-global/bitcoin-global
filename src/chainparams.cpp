@@ -122,7 +122,7 @@ public:
         // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("seed.bitcoin-global.dev");
+        vSeeds.emplace_back("dnsseed.bitcoin-global.dev");
         vSeeds.emplace_back("dnsseed.bitcoin-global.io");
         vSeeds.emplace_back("dnsseed.bitcoin-global.co");
 
@@ -234,7 +234,7 @@ public:
         // nodes with support for servicebits filtering should be at the top
         vSeeds.emplace_back("test-dnsseed.bitcoin-global.io");
         vSeeds.emplace_back("test-dnsseed.bitcoin-global.co");
-        vSeeds.emplace_back("globt-dnsseed.bitcoin-global.co");
+        vSeeds.emplace_back("test-dnsseed.bitcoin-global.dev");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
