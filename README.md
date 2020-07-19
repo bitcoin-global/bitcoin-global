@@ -1,14 +1,11 @@
 <p align="center"><img src="https://i.ibb.co/n0xQ1RY/logo-transparent.png" height="300"></p>
 <p align="center">
-  <img src="https://img.shields.io/badge/slack-%40bitcoin--global-yellow?style=flat-square&logo=slack" alt="Slack">
-  <img src="https://img.shields.io/badge/twitter-%40bitcoin--global-blue?style=flat-square&logo=twitter" alt="Twitter">
+  <img src="https://img.shields.io/badge/slack-%40bitcoin--global--io-yellow?style=flat-square&logo=slack" alt="Slack">
+  <img src="https://img.shields.io/badge/twitter-%40bitcoinglobalio-blue?style=flat-square&logo=twitter" alt="Twitter">
   <br>
   <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/bitcoin-global/bitcoin-global?sort=semver">
    <a href="https://travis-ci.com/github/bitcoin-global/bitcoin-global/builds" target="_blank">
      <img src="https://travis-ci.com/bitcoin-global/bitcoin-global.svg?token=Kiztszp4vesa1iqMmSZ1&branch=master">
-   </a>
-   <a href="https://app.circleci.com/pipelines/github/bitcoin-global/bitcoin-global" target="_blank">
-      <img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/bitcoin-global/bitcoin-global/master?label=release">
    </a>
   <img src="https://img.shields.io/badge/status-stable-green.svg">
   <a href="https://github.com/bitcoin-global/bitcoin-global/releases">
@@ -22,13 +19,15 @@
 What is Bitcoin Global?
 ----------------
 
-Bitcoin Global is an experimental digital currency extending the original Bitcoin implementation, which enables instant payments to anyone, anywhere in the world. Bitcoin Global uses peer-to-peer technology to operate with no central authority: managing transactions and issuing money are carried out collectively by the network. 
-
-By introducing smaller blocks of 400KB, Bitcoin Global implements a sustainable economic model for all chain participants, ensuring at the same time that decentralization and profitability are maintained. Most importantly, smaller blocks translate to a higher total number of nodes due to lesser computational power requirements and more nodes on the other side ensure an increased degree of decentralization.
+By introducing smaller blocks of 400KB, Bitcoin Global implements a sustainable economic model for all chain participants, 
+ensuring at the same time that decentralization and profitability are maintained. Most importantly, 
+smaller blocks translate to a higher total number of nodes due to lesser computational power requirements 
+and more nodes on the other side ensure an increased degree of decentralization.
 
 For more information, as well as an immediately useable, binary version of
-the Bitcoin Global software, see https://bitcoin-global.io/en/download/ or read the
-[original whitepaper](https://bitcoin-global.io/whitepaper.pdf).
+the Bitcoin Global software, see https://bitcoin-global.io or read the
+[original documentation](https://bitcoin-global.io/assets/images/documentation.pdf).
+
 
 Specifications
 -------
@@ -46,17 +45,17 @@ Replay protection     | :heavy_check_mark:
 
 ## Resources
 
-* [Blockchain Explorer](https://blockchain.bitcoin-global.io/)
+* [Blockchain Explorer](https://mainnet.bitcoin-global.io/)
 * [White Paper](https://bitcoin-global.io/whitepaper.pdf)
 
 ### Community
 
-* [Telegram](https://t.me/bitcoin-global)
-* [Discord](https://discord.gg/bitcoin-global)
-* [Twitter](https://www.twitter.com/bitcoin-global)
-* [Facebook](https://www.facebook.com/bitcoin-global/)
-* [Reddit](https://www.reddit.com/r/bitcoin-global/)
-
+* [Slack](https://bitcoin-global-io.slack.com)
+* [Telegram](https://t.me/BitcoinGlobalOffical)
+* [Discord](https://discord.gg/JFtQdk9)
+* [Twitter](https://twitter.com/bitcoinglobalio)
+* [Facebook](https://www.facebook.com/BitcoinGlobalGLOB)
+* [Reddit](https://www.reddit.com/user/Bitcoin-Global)
 
 License
 -------
