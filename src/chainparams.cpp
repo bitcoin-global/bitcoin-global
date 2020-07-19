@@ -202,7 +202,7 @@ public:
         // Bitcoin Global hard fork on test chain.
         consensus.BTGHeight = 1780318;
         consensus.BTGPremineWindow = 50;
-        consensus.BTGPremineEnforceWhitelist = false;
+        consensus.BTGPremineEnforceWhitelist = true;
         consensus.BTGPremineReward = 1000;
 
         // The best chain should have at least this much work.
