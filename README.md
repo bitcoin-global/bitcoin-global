@@ -46,7 +46,7 @@ Replay protection     | :heavy_check_mark:
 ## Resources
 
 * [Blockchain Explorer](https://mainnet.bitcoin-global.io/)
-* [White Paper](https://bitcoin-global.io/whitepaper.pdf)
+* [Documentation](https://bitcoin-global.io/assets/images/documentation.pdf)
 
 ### Community
 
