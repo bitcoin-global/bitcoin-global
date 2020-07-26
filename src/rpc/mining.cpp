@@ -522,6 +522,7 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
 
     // NOTE: If at some point we support pre-segwit miners post-segwit-activation, this needs to take segwit support into consideration
     const bool fPreSegWit = (pindexPrev->nHeight + 1 < consensusParams.SegwitHeight);
+    const bool fBtgEnabled = (pindexPrev->nHeight + 1 >= consensusParams.BTGHeight);
 
     UniValue aCaps(UniValue::VARR); aCaps.push_back("proposal");
 
@@ -641,7 +642,7 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
     result.pushKV("mutable", aMutable);
     result.pushKV("noncerange", "00000000ffffffff");
     int64_t nSigOpLimit = MAX_BLOCK_SIGOPS_COST;
-    int64_t nSizeLimit = MAX_BLOCK_SERIALIZED_SIZE;
+    int64_t nSizeLimit = fBtgEnabled ? MAX_BTG_BLOCK_SERIALIZED_SIZE : MAX_BLOCK_SERIALIZED_SIZE;
     if (fPreSegWit) {
         assert(nSigOpLimit % WITNESS_SCALE_FACTOR == 0);
         nSigOpLimit /= WITNESS_SCALE_FACTOR;
@@ -651,7 +652,7 @@ static UniValue getblocktemplate(const JSONRPCRequest& request)
     result.pushKV("sigoplimit", nSigOpLimit);
     result.pushKV("sizelimit", nSizeLimit);
     if (!fPreSegWit) {
-        result.pushKV("weightlimit", (int64_t)MAX_BLOCK_WEIGHT);
+        result.pushKV("weightlimit", (int64_t)(fBtgEnabled ? MAX_BTG_BLOCK_WEIGHT : MAX_BLOCK_WEIGHT));
     }
     result.pushKV("curtime", pblock->GetBlockTime());
     result.pushKV("bits", strprintf("%08x", pblock->nBits));

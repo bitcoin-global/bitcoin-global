@@ -1808,7 +1808,7 @@ static UniValue getblockstats(const JSONRPCRequest& request)
     CAmount totalfee = 0;
     int64_t inputs = 0;
     int64_t maxtxsize = 0;
-    int64_t mintxsize = MAX_BLOCK_SERIALIZED_SIZE;
+    int64_t mintxsize = MAX_BTG_BLOCK_SERIALIZED_SIZE;
     int64_t outputs = 0;
     int64_t swtotal_size = 0;
     int64_t swtotal_weight = 0;

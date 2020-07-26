@@ -52,7 +52,10 @@ ReadStatus PartiallyDownloadedBlock::InitData(const CBlockHeaderAndShortTxIDs& c
         return READ_STATUS_INVALID;
     if (cmpctblock.shorttxids.size() + cmpctblock.prefilledtxn.size() > MAX_BLOCK_WEIGHT / MIN_SERIALIZABLE_TRANSACTION_WEIGHT)
         return READ_STATUS_INVALID;
-
+    if (IsBTGHardForkEnabledForCurrentBlock(Params().GetConsensus()) && 
+        (cmpctblock.shorttxids.size() + cmpctblock.prefilledtxn.size() > MAX_BTG_BLOCK_WEIGHT / MIN_SERIALIZABLE_TRANSACTION_WEIGHT))
+        return READ_STATUS_INVALID;
+    
     assert(header.IsNull() && txn_available.empty());
     header = cmpctblock.header;
     txn_available.resize(cmpctblock.BlockTxCount());
