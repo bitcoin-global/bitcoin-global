@@ -15,14 +15,24 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 {
     assert(pindexLast != nullptr);
     int nHeight = pindexLast->nHeight + 1;
-    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    bool postFork = nHeight >= params.BTGHeight;
 
-    // Enable min-difficulty mining for premine period.
-    if (nHeight >= params.BTGHeight && (nHeight < params.BTGHeight + params.BTGPremineWindow))
-    {
-        return nProofOfWorkLimit;
+    if (!postFork) {
+        // Original Bitcoin PoW.
+        return BitcoinGetNextWorkRequired(pindexLast, pblock, params);
     }
+    else if (nHeight < params.BTGHeight + params.BTGPremineWindow) {
+        // Enable min-difficulty mining for premine period.
+        return UintToArith256(params.powLimit).GetCompact();
+    }
+    return LwmaGetNextWorkRequired(pindexLast, pblock, params);
+}
 
+unsigned int BitcoinGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
+    assert(pindexLast != nullptr);
+    unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
+    
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
     {
@@ -51,10 +61,10 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     const CBlockIndex* pindexFirst = pindexLast->GetAncestor(nHeightFirst);
     assert(pindexFirst);
 
-    return CalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
+    return BitcoinCalculateNextWorkRequired(pindexLast, pindexFirst->GetBlockTime(), params);
 }
 
-unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
+unsigned int BitcoinCalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
     if (params.fPowNoRetargeting)
         return pindexLast->nBits;
@@ -77,6 +87,69 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         bnNew = bnPowLimit;
 
     return bnNew.GetCompact();
+}
+
+unsigned int LwmaGetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
+    // Special difficulty rule for testnet:
+    // If the new block's timestamp is more than 2 * 10 minutes
+    // then allow mining of a min-difficulty block.
+    if (params.fPowAllowMinDifficultyBlocks &&
+        pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 2) {
+        return UintToArith256(params.powLimit).GetCompact();
+    }
+    return LwmaCalculateNextWorkRequired(pindexLast, params);
+}
+
+unsigned int LwmaCalculateNextWorkRequired(const CBlockIndex* pindexLast, const Consensus::Params& params)
+{
+    if (params.fPowNoRetargeting) {
+        return pindexLast->nBits;
+    }
+
+    const int height = pindexLast->nHeight + 1;
+    const int64_t T = params.nPowTargetSpacing;
+    const int N = params.nZawyLwmaAveragingWindow;
+    const int k = params.nZawyLwmaAdjustedWeight;
+    const int dnorm = params.nZawyLwmaMinDenominator;
+    const bool limit_st = params.bZawyLwmaSolvetimeLimitation;
+    assert(height > N);
+
+    arith_uint256 sum_target;
+    int t = 0, j = 0;
+
+    // Loop through N most recent blocks.
+    for (int i = height - N; i < height; i++) {
+        const CBlockIndex* block = pindexLast->GetAncestor(i);
+        const CBlockIndex* block_Prev = block->GetAncestor(i - 1);
+        int64_t solvetime = block->GetBlockTime() - block_Prev->GetBlockTime();
+
+        if (limit_st && solvetime > 6 * T) {
+            solvetime = 6 * T;
+        }
+
+        j++;
+        t += solvetime * j;  // Weighted solvetime sum.
+
+        // Target sum divided by a factor, (k N^2).
+        // The factor is a part of the final equation. However we divide sum_target here to avoid
+        // potential overflow.
+        arith_uint256 target;
+        target.SetCompact(block->nBits);
+        sum_target += target / (k * N * N);
+    }
+    // Keep t reasonable in case strange solvetimes occurred.
+    if (t < N * k / dnorm) {
+        t = N * k / dnorm;
+    }
+
+    const arith_uint256 pow_limit = UintToArith256(params.powLimit);
+    arith_uint256 next_target = t * sum_target;
+    if (next_target > pow_limit) {
+        next_target = pow_limit;
+    }
+
+    return next_target.GetCompact();
 }
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)

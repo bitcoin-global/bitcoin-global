@@ -72,6 +72,13 @@ struct Params {
     int BTGPremineWindow;
     int BTGPremineReward;
     bool BTGPremineEnforceWhitelist;
+    // Params for Zawy's LWMA difficulty adjustment algorithm.
+    int64_t nZawyLwmaAveragingWindow;
+    int64_t nZawyLwmaAdjustedWeight;
+    int64_t nZawyLwmaMinDenominator;
+    bool bZawyLwmaSolvetimeLimitation;
+    /** Limit MAX_FUTURE_BLOCK_TIME **/
+    int64_t BTGMaxFutureBlockTime;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
