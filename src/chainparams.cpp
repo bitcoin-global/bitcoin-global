@@ -92,6 +92,12 @@ public:
         consensus.BTGPremineEnforceWhitelist = true;
         consensus.BTGPremineReward = 1000;
 
+        consensus.nZawyLwmaAveragingWindow = 45;
+        consensus.nZawyLwmaAdjustedWeight = 13500;
+        consensus.nZawyLwmaMinDenominator = 10;
+        consensus.bZawyLwmaSolvetimeLimitation = true;
+        consensus.BTGMaxFutureBlockTime = 12 * 10 * 60;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000e1ab5ec9348e9f4b8eb8154");
 
@@ -205,6 +211,12 @@ public:
         consensus.BTGPremineEnforceWhitelist = true;
         consensus.BTGPremineReward = 1000;
 
+        consensus.nZawyLwmaAveragingWindow = 45;
+        consensus.nZawyLwmaAdjustedWeight = 13500;
+        consensus.nZawyLwmaMinDenominator = 10;
+        consensus.bZawyLwmaSolvetimeLimitation = false;
+        consensus.BTGMaxFutureBlockTime = 7 * 10 * 60;
+
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000001495c1d5a01e2af8a23");
 
@@ -299,6 +311,12 @@ public:
         consensus.BTGPremineWindow = 50;
         consensus.BTGPremineEnforceWhitelist = true;
         consensus.BTGPremineReward = 100;
+
+        consensus.nZawyLwmaAveragingWindow = 45;
+        consensus.nZawyLwmaAdjustedWeight = 13500;
+        consensus.nZawyLwmaMinDenominator = 10;
+        consensus.bZawyLwmaSolvetimeLimitation = true;
+        consensus.BTGMaxFutureBlockTime = 7 * 10 * 60;
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
