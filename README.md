@@ -1,17 +1,17 @@
 <p align="center"><img src="https://i.ibb.co/n0xQ1RY/logo-transparent.png" height="300"></p>
 <p align="center">
-  <img src="https://img.shields.io/badge/slack-%40bitcoin--global--io-yellow?style=flat-square&logo=slack" alt="Slack">
+  
   <img src="https://img.shields.io/badge/twitter-%40bitcoinglobalio-blue?style=flat-square&logo=twitter" alt="Twitter">
   <br>
   <img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/bitcoin-global/bitcoin-global?sort=semver">
-   <a href="https://travis-ci.com/github/bitcoin-global/bitcoin-global/builds" target="_blank">
+ <!--  <a href="https://travis-ci.com/github/bitcoin-global/bitcoin-global/builds" target="_blank">
      <img src="https://travis-ci.com/bitcoin-global/bitcoin-global.svg?token=Kiztszp4vesa1iqMmSZ1&branch=master">
-   </a>
+   </a>-->
   <img src="https://img.shields.io/badge/status-stable-green.svg">
   <a href="https://github.com/bitcoin-global/bitcoin-global/releases">
-    <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/bitcoin-global/bitcoin-global/total">
+   <!-- <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/bitcoin-global/bitcoin-global/total"> 
   </a>
-  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bitcoin-global/bitcoin-global"><br>
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bitcoin-global/bitcoin-global"><br>-->
 </p>
 
 
@@ -19,7 +19,7 @@
 What is Bitcoin Global?
 ----------------
 
-By introducing smaller blocks of 400KB, Bitcoin Global implements a sustainable economic model for all chain participants, 
+By introducing smaller blocks of 400KB, Bitcoin Global, a Bitcoin hardfork, implements a sustainable economic model for all chain participants, 
 ensuring at the same time that decentralization and profitability are maintained. Most importantly, 
 smaller blocks translate to a higher total number of nodes due to lesser computational power requirements 
 and more nodes on the other side ensure an increased degree of decentralization.
@@ -33,13 +33,13 @@ Specifications
 -------
 Specification         | Value
 ---                   | ---
-Supply                | 21.1 Million
-Premine               | 0.1 Million
+Supply                | 21.1 million
+Premine               | 0.1 million
 PoW algorithm         | SHA256
 Mining hardware       | ASIC              
-Block interval        | 10 Minutes
+Block interval        | 10 minutes
 Block size            | 0.4 MB
-Difficulty adjustment | 2 weeks
+Difficulty adjustment | 10 minutes
 SegWit                | :heavy_check_mark:
 Replay protection     | :heavy_check_mark:
 
@@ -50,7 +50,7 @@ Replay protection     | :heavy_check_mark:
 
 ### Community
 
-* [Slack](https://bitcoin-global-io.slack.com)
+
 * [Telegram](https://t.me/BitcoinGlobalOffical)
 * [Discord](https://discord.gg/JFtQdk9)
 * [Twitter](https://twitter.com/bitcoinglobalio)
